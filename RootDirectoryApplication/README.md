@@ -85,7 +85,9 @@ Table of Contents
 | 1.2 | Added ERDs | Yasaman | 20-03-2024 |
 | 1.3 | Added notes about testing | Brian | 20-03-2024 |
 | 1.4 | Added ERDs<br><br>Added Use Case Diagrams<br><br>Finished JUnit section<br><br>Added UML diagrams<br><br>Added notes about testing<br><br>Formatted the document<br><br>Finished introduction and application architecture<br><br>Added acronyms/abbreviations section<br><br>Added table of figures and references | Yasaman, Fereshteh, Bennett | 21-03-2024 |
-| 1.5 | Added finishing touches | Everyone | 22-03-2024 |
+| 1.5 | Added user stories and Plan for test cases | Fereshteh | 22-03-2024 |
+| 1.6 | Converted word document to README.md file and added finishing touches | Yasaman | 22-03-2024 |
+
 
 ### Introduction
 
@@ -123,24 +125,57 @@ Figure 1: Use Case Diagram for Food Waste Reduction Platform
 
 #### User Stories
 
+**User Story: Add New Item to Inventory**
 
-adf
+As a retailer, I want to be able to add new food items to my inventory, so I can keep track of the products I have available for sale.
 
-asdf
+**User Story: Update Item Quantity**
 
-asd
+As a retailer, I want to have the ability to update the quantity of existing food items in my inventory, so I can adjust my stock levels accurately based on demand.
 
-asdf
+**User Story: Set Expiration Date for Items**
 
-asf
+As a retailer, I want to set or update expiration dates for food items in my inventory, so I can ensure that I am selling products before they expire and minimize waste.
 
-asg
+**User Story: View Inventory List**
 
-asdg
+As a retailer, I want to view a comprehensive list of all the food items in my inventory, so I can easily monitor stock levels and make informed decisions about purchasing and sales strategies.
 
-sadga
+**User Story: Search Functionality**
 
-asdf
+As a retailer, I want to have a search functionality in my inventory system, so I can quickly find specific items based on their names or other attributes, saving time and effort.
+
+**User Story: List Items for Donation**
+
+As a retailer, I want to be able to list certain food items for donation, so I can contribute to reducing food waste and help those in need within the community.
+
+**User Story: List Items for Sale at Discounted Price**
+
+As a retailer, I want the option to list specific food items for sale at a discounted price, so I can clear excess inventory and attract more customers with special offers.
+
+**User Story: Decision Support for Donation or Sale**
+
+As a retailer, I want the system to provide decision support based on quantity and expiration dates, so I can make informed choices about whether to donate surplus items or put them up for sale at reduced prices.
+
+**User Story: View Available Food Items**
+
+As a consumer, I want to view the list of available food items listed by retailers, so I can see what products are offered for sale at discounted prices.
+
+**User Story: Purchase Food Items**
+
+As a consumer, I want the ability to purchase food items listed by retailers, so I can buy quality products at reduced prices while also contributing to reducing food waste.
+
+**User Story: Subscription for Surplus Food Alerts**
+
+As a consumer, I want to subscribe to receive alerts about surplus food items based on my location and food preferences, so I can stay informed about opportunities to purchase or acquire discounted products.
+
+**User Story: Receive Automatic Notifications**
+
+As a consumer, I want to receive automatic notifications via email or phone whenever retailers list surplus food items on the platform, so I can quickly take advantage of the available deals and help reduce food waste.
+
+**User Story: Claim Surplus Food Items**
+
+As a charitable organization, I want to claim surplus food items listed by retailers for donation, so I can distribute them to those in need and help alleviate hunger in the community.
 
 ### Detailed Design
 
@@ -213,9 +248,47 @@ The application will be tested with Junits to test some of the following variabl
 
 We will also have JUnit test cases for each form validation, to test the DAO databse accessibility, and to test DTO and DAO connectivity.
 
-#### Junit Testing
-
 We will also create test cases to test that our use cases work as expected and as planned.
+
+
+#### Plan for Test Cases
+
+1. **Preparation**
+
+- Review project documentation related to project requirements and design
+- Understand the objectives and functionalities of each part of the system
+- Develop a list of test cases based on requirements and system functionalities
+
+2. **Test Design**
+
+- Create a test coverage map to ensure comprehensive coverage of all system functions and components
+- Identify and select test cases for each part of the system, including user registration, inventory management, food claiming, etc.
+- Determine testing methods for various scenarios
+
+3. **Test Environment Setup**
+
+- Set up a development environment for running tests, including temporary database and web environment
+- Installing and configuring testing tools such as JUnit for executing unit tests
+
+4. **Test Execution**
+
+- Execute various test cases based on the test coverage map and identified test cases
+- Record test results, including successful executions and encountered errors
+
+5. **Test Result Analysis**
+
+- Analyze test results and investigate causes of any errors or issues
+- Evaluate test coverage and ensure complete coverage based on the test coverage map
+
+6. **Reporting**
+
+- Generate comprehensive reports of test results, including successful cases, failed cases, and test coverage
+- Provide suggestions for improving the testing process and enhancing software quality
+
+7. **Completion and Optimization**
+
+- Performe tests in different environments and evaluate overall performance
+- Optimize test cases and procedures for efficient and effective testing
 
 ### References
 
