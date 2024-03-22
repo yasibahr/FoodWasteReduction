@@ -85,7 +85,9 @@ Table of Contents
 | 1.2 | Added ERDs | Yasaman | 20-03-2024 |
 | 1.3 | Added notes about testing | Brian | 20-03-2024 |
 | 1.4 | Added ERDs<br><br>Added Use Case Diagrams<br><br>Finished JUnit section<br><br>Added UML diagrams<br><br>Added notes about testing<br><br>Formatted the document<br><br>Finished introduction and application architecture<br><br>Added acronyms/abbreviations section<br><br>Added table of figures and references | Yasaman, Fereshteh, Bennett | 21-03-2024 |
-| 1.5 | Added finishing touches | Everyone | 22-03-2024 |
+| 1.5 | Added user stories and Plan for test cases | Fereshteh | 22-03-2024 |
+| 1.6 | Converted word document to README.md file and added finishing touches | Yasaman | 22-03-2024 |
+
 
 ### Introduction
 
