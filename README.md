@@ -213,9 +213,47 @@ The application will be tested with Junits to test some of the following variabl
 
 We will also have JUnit test cases for each form validation, to test the DAO databse accessibility, and to test DTO and DAO connectivity.
 
-#### Junit Testing
-
 We will also create test cases to test that our use cases work as expected and as planned.
+
+
+#### Plan for Test Cases
+
+1. **Preparation**
+
+- Review project documentation related to project requirements and design
+- Understand the objectives and functionalities of each part of the system
+- Develop a list of test cases based on requirements and system functionalities
+
+2. **Test Design**
+
+- Create a test coverage map to ensure comprehensive coverage of all system functions and components
+- Identify and select test cases for each part of the system, including user registration, inventory management, food claiming, etc.
+- Determine testing methods for various scenarios
+
+3. **Test Environment Setup**
+
+- Set up a development environment for running tests, including temporary database and web environment
+- Installing and configuring testing tools such as JUnit for executing unit tests
+
+4. **Test Execution**
+
+- Execute various test cases based on the test coverage map and identified test cases
+- Record test results, including successful executions and encountered errors
+
+5. **Test Result Analysis**
+
+- Analyze test results and investigate causes of any errors or issues
+- Evaluate test coverage and ensure complete coverage based on the test coverage map
+
+6. **Reporting**
+
+- Generate comprehensive reports of test results, including successful cases, failed cases, and test coverage
+- Provide suggestions for improving the testing process and enhancing software quality
+
+7. **Completion and Optimization**
+
+- Performe tests in different environments and evaluate overall performance
+- Optimize test cases and procedures for efficient and effective testing
 
 ### References
 
