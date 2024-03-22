@@ -123,24 +123,57 @@ Figure 1: Use Case Diagram for Food Waste Reduction Platform
 
 #### User Stories
 
+**User Story: Add New Item to Inventory**
 
-adf
+As a retailer, I want to be able to add new food items to my inventory, so I can keep track of the products I have available for sale.
 
-asdf
+**User Story: Update Item Quantity**
 
-asd
+As a retailer, I want to have the ability to update the quantity of existing food items in my inventory, so I can adjust my stock levels accurately based on demand.
 
-asdf
+**User Story: Set Expiration Date for Items**
 
-asf
+As a retailer, I want to set or update expiration dates for food items in my inventory, so I can ensure that I am selling products before they expire and minimize waste.
 
-asg
+**User Story: View Inventory List**
 
-asdg
+As a retailer, I want to view a comprehensive list of all the food items in my inventory, so I can easily monitor stock levels and make informed decisions about purchasing and sales strategies.
 
-sadga
+**User Story: Search Functionality**
 
-asdf
+As a retailer, I want to have a search functionality in my inventory system, so I can quickly find specific items based on their names or other attributes, saving time and effort.
+
+**User Story: List Items for Donation**
+
+As a retailer, I want to be able to list certain food items for donation, so I can contribute to reducing food waste and help those in need within the community.
+
+**User Story: List Items for Sale at Discounted Price**
+
+As a retailer, I want the option to list specific food items for sale at a discounted price, so I can clear excess inventory and attract more customers with special offers.
+
+**User Story: Decision Support for Donation or Sale**
+
+As a retailer, I want the system to provide decision support based on quantity and expiration dates, so I can make informed choices about whether to donate surplus items or put them up for sale at reduced prices.
+
+**User Story: View Available Food Items**
+
+As a consumer, I want to view the list of available food items listed by retailers, so I can see what products are offered for sale at discounted prices.
+
+**User Story: Purchase Food Items**
+
+As a consumer, I want the ability to purchase food items listed by retailers, so I can buy quality products at reduced prices while also contributing to reducing food waste.
+
+**User Story: Subscription for Surplus Food Alerts**
+
+As a consumer, I want to subscribe to receive alerts about surplus food items based on my location and food preferences, so I can stay informed about opportunities to purchase or acquire discounted products.
+
+**User Story: Receive Automatic Notifications**
+
+As a consumer, I want to receive automatic notifications via email or phone whenever retailers list surplus food items on the platform, so I can quickly take advantage of the available deals and help reduce food waste.
+
+**User Story: Claim Surplus Food Items**
+
+As a charitable organization, I want to claim surplus food items listed by retailers for donation, so I can distribute them to those in need and help alleviate hunger in the community.
 
 ### Detailed Design
 
