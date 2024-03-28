@@ -4,19 +4,21 @@
  */
 package businesslayer;
 
+import dataaccesslayer.FoodItemDaoImpl;
 import java.sql.SQLException;
 import java.util.List;
+import model.FoodItem;
 
 /**
  *
  * @author Brian
  */
-public class FoodItemsBusinessLogic {
+public class FoodItemBusinessLogic {
     
-    private FoodItemsDaoImpl foodItemsDao = null;
+    private FoodItemDaoImpl foodItemsDao = null;
 
-    public FoodItemsBusinessLogic() {
-        foodItemsDao = new DaoImpl();
+    public FoodItemBusinessLogic() {
+        foodItemsDao = new FoodItemDaoImpl();
     }
 
     public List<FoodItem> getAllFoodItems() throws SQLException {
@@ -24,6 +26,6 @@ public class FoodItemsBusinessLogic {
     }
 
     public void addFoodItem(FoodItem foodItem) {
-        foodItemsDao.add(foodItem);
+        foodItemsDao.addFoodItem(foodItem);
     }
 }

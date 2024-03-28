@@ -12,14 +12,14 @@ import java.time.LocalDate;
  */
 public class Transactions {
     
-    private String transactionID;
+    private Integer transactionID;
     private LocalDate transactionDate;
 
-    public String getTransactionID() {
+    public Integer getTransactionID() {
         return transactionID;
     }
 
-    public void setTransactionID(String transactionID) {
+    public void setTransactionID(Integer transactionID) {
         this.transactionID = transactionID;
     }
 

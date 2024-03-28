@@ -14,7 +14,7 @@ import model.UserType;
 public interface UserTypeDao {
     
         List<UserType> getAllUserTypes();
-	UserType getUserTypeByUserTypeID(String userTypeID);
+	UserType getUserTypeByUserTypeID(Integer userTypeID);
 	void addUserType(UserType userType);
 	void updateUserType(UserType userType);
 	void deleteUserType(UserType userType);

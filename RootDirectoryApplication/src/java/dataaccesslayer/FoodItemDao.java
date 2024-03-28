@@ -5,17 +5,17 @@
 package dataaccesslayer;
 
 import java.util.List;
-import model.FoodItems;
+import model.FoodItem;
 
 /**
  *
  * @author Brian
  */
-public interface FoodItemsDao {
+public interface FoodItemDao {
     
-        List<FoodItems> getAllFoodItems();
-	FoodItems getFoodItemByFoodItemID(String foodItemID);
-	void addFoodItem(FoodItems foodItem);
-	void updateFoodItem(FoodItems foodItem);
-	void deleteFoodItem(FoodItems foodItem);
+        List<FoodItem> getAllFoodItems();
+	FoodItem getFoodItemByFoodItemID(Integer foodID);
+	void addFoodItem(FoodItem foodItem);
+	void updateFoodItem(FoodItem foodItem);
+	void deleteFoodItem(FoodItem foodItem);
 }

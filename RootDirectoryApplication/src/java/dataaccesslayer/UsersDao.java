@@ -15,7 +15,7 @@ import model.Users;
 public interface UsersDao {
     
         List<Users> getAllUsers();
-	Users getUserByUserID(String userID);
+	Users getUserByUserID(Integer userID);
 	void addUser(Users user);
 	void updateUser(Users user);
 	void deleteUser(Users user);

@@ -4,8 +4,10 @@
  */
 package businesslayer;
 
+import dataaccesslayer.CityDaoImpl;
 import java.sql.SQLException;
 import java.util.List;
+import model.City;
 
 /**
  *
@@ -13,9 +15,9 @@ import java.util.List;
  */
 public class CityBusinessLogic {
     
-    private CityDaoImpl authorsDao = null;
+    private CityDaoImpl cityDao = null;
 
-    public AuthorsBusinessLogic() {
+    public CityBusinessLogic() {
         cityDao = new CityDaoImpl();
     }
 

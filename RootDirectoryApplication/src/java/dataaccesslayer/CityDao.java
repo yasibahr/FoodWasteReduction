@@ -13,8 +13,8 @@ import model.City;
  */
 public interface CityDao {
     
-        List<City> getAllUsers();
-	City getCityByCityID(String cityID);
+        List<City> getAllCities();
+        City getCityByCityID(Integer cityID);
 	void addCity(City city);
 	void updateCity(City city);
 	void deleteCity(City city);

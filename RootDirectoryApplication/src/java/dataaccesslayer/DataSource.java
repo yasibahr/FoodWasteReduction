@@ -12,7 +12,7 @@ public class DataSource {
 
     private Connection connection = null;
     //Set sourcepath when known
-    private String url = "jdbc:mysql://localhost:3306/DATABASE SOURCE PATH GOES HERE";
+    private String url = "jdbc:mysql://localhost:3306/FoodWasteReduction?useSSL=false&&allowPublicKeyRetrieval=true";
     private String username = "root";
     private String password = "algonquin";
 

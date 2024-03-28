@@ -4,8 +4,10 @@
  */
 package businesslayer;
 
+import dataaccesslayer.StatusTypeDaoImpl;
 import java.sql.SQLException;
 import java.util.List;
+import model.StatusType;
 
 /**
  *
@@ -18,12 +20,12 @@ public class StatusTypeBusinessLogic {
     public StatusTypeBusinessLogic() {
         statusTypeDao = new StatusTypeDaoImpl();
     }
-
+    
     public List<StatusType> getAllStatusTypes() throws SQLException {
         return statusTypeDao.getAllStatusTypes();
     }
 
-    public void addStatusType(StatusType statusType) {
-        statusTypeDao.add(statusType);
+    public void addStatusTypeName(StatusType statusType) {
+        statusTypeDao.addStatusType(statusType);
     }
 }

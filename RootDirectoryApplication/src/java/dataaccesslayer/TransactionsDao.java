@@ -14,8 +14,8 @@ import model.Transactions;
 public interface TransactionsDao {
     
         List<Transactions> getAllTransactions();
-	Transactions getTransactionByTransactionID(String transactionID);
-	void addUser(Transactions transaction);
-	void updateUser(Transactions transaction);
-	void deleteUser(Transactions transaction);
+	Transactions getTransactionByTransactionID(Integer transactionID);
+	void addTransaction(Transactions transaction);
+	void updateTransaction(Transactions transaction);
+	void deleteTransaction(Transactions transaction);
 }
