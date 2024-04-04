@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author Brian
+ * @author Brian, Yasaman
  */
 public class Users {
     
@@ -16,6 +16,8 @@ public class Users {
     private String password;
     private String email;
     private String phone;
+    private UserType userType;
+    private City city;
 
     public Integer getUserID() {
         return userID;
@@ -57,5 +59,19 @@ public class Users {
         this.phone = phone;
     }
     
-    
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 }

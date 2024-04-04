@@ -1,15 +1,14 @@
+package model;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package model;
-
-import java.time.LocalDate;
+*/
 import java.util.Date;
 
 /**
  *
- * @author Brian
+ * @author Brian, Yasaman
  */
 public class FoodItem {
     
@@ -18,11 +17,11 @@ public class FoodItem {
     private Date expirationDate;
     private float price;
     private int quantity;
-    private Integer statusTypeID;
-    private Integer transactionID;
-    private Integer userID;
-    private Integer userTypeID;
-    private Integer cityID;
+    private StatusType statusType;
+    private Transactions transaction;
+    private Users user;
+    private UserType userType;
+    private City city;
 
     public Integer getFoodID() {
         return foodID;
@@ -64,45 +63,43 @@ public class FoodItem {
         this.quantity = quantity;
     }
 
-    public Integer getStatusTypeID() {
-        return statusTypeID;
+    public StatusType getStatusType() {
+        return statusType;
     }
 
-    public void setStatusTypeID(Integer statusTypeID) {
-        this.statusTypeID = statusTypeID;
+    public void setStatusType(StatusType statusType) {
+        this.statusType = statusType;
     }
 
-    public Integer getTransactionID() {
-        return transactionID;
+    public Transactions getTransaction() {
+        return transaction;
     }
 
-    public void setTransactionID(Integer transactionID) {
-        this.transactionID = transactionID;
+    public void setTransaction(Transactions transaction) {
+        this.transaction = transaction;
     }
 
-    public Integer getUserID() {
-        return userID;
+    public Users getUser() {
+        return user;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
-    public Integer getUserTypeID() {
-        return userTypeID;
+    public UserType getUserType() {
+        return userType;
     }
 
-    public void setUserTypeID(Integer userTypeID) {
-        this.userTypeID = userTypeID;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
-    public Integer getCityID() {
-        return cityID;
+    public City getCity() {
+        return city;
     }
 
-    public void setCityID(Integer cityID) {
-        this.cityID = cityID;
+    public void setCity(City city) {
+        this.city = city;
     }
-
-    
 }

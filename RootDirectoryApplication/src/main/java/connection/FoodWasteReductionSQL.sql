@@ -1,4 +1,7 @@
-
+/**
+ *
+ * @author Yasaman, Brian
+ */
 DROP DATABASE IF EXISTS FoodWasteReduction;
 CREATE DATABASE FoodWasteReduction;
 

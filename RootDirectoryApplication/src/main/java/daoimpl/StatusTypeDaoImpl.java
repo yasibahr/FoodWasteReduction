@@ -16,7 +16,7 @@ import model.StatusType;
 
 /**
  *
- * @author Brian
+ * @author Brian, Yasaman
  */
 public class StatusTypeDaoImpl implements StatusTypeDao {
 

@@ -17,7 +17,7 @@ import model.FoodItem;
 
 /**
  *
- * @author Brian
+ * @author Brian, Yasaman
  */
 public class FoodItemDaoImpl implements FoodItemDao{
 

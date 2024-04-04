@@ -15,7 +15,7 @@ import java.util.Properties;
 
 /**
  * Used to connect to the database 
- * @author Yasaman
+ * @author Yasaman, Brian
  */
 public class DataSource {
 

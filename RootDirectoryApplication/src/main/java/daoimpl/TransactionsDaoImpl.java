@@ -22,8 +22,12 @@ import java.util.ArrayList;
  * @author Yasaman, Brian
  */
 public class TransactionsDaoImpl implements TransactionsDao{
-    private Properties dbProperties;
     ArrayList<Transactions> allTransactions = null;
+    
+    /**
+     * Empty constructor 
+     */
+    public TransactionsDaoImpl(){}
 
     /**
      *
@@ -40,15 +44,14 @@ public class TransactionsDaoImpl implements TransactionsDao{
         try{
             con = DataSource.getConnection();
             
-            String query = "SELECT * FROM Transactions ORDER BY transactionID";
-            pstmt = con.prepareStatement(query);
+            pstmt = con.prepareStatement("SELECT * FROM Transactions ORDER BY transactionID");
             rs=pstmt.executeQuery();
             allTransactions = new ArrayList<Transactions>();
             
             while (rs.next()){
                 Transactions transaction = new Transactions();
-                int transactionID = rs.getInt("transactionID");
-                transaction.setTransactionID(transactionID);
+                
+                transaction.setTransactionID(rs.getInt("transactionID"));
                 
                 //convert java.sql.Timestamp to java.time.LocalDateTime to match SQL's DateTime
                 java.sql.Timestamp dbTimestamp = rs.getTimestamp("transactionDate");
@@ -84,10 +87,12 @@ public class TransactionsDaoImpl implements TransactionsDao{
             
             pstmt = con.prepareStatement("SELECT * FROM Transactions WHERE transactionID = ?");
             pstmt.setInt(1, transactionID);
+            
             rs=pstmt.executeQuery();
                        
-            while (rs.next()){
+            if (rs.next()){
                 transaction = new Transactions();
+                
                 transaction.setTransactionID(rs.getInt("transactionID")); //get id and set id in DTO
                 
                 //retrieve transactionDate from rs and store it
@@ -117,9 +122,10 @@ public class TransactionsDaoImpl implements TransactionsDao{
         try{
             con = DataSource.getConnection();
 
-            pstmt = con.prepareStatement("INSERT INTO transaction (transactionDate "
+            pstmt = con.prepareStatement("INSERT INTO Transactions (transactionDate) "
                     + "VALUES (?)");
-            //convert LocalDateTime to Timestamp for the SQL query
+            
+//convert LocalDateTime to Timestamp for the SQL query
             java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf(transaction.getTransactionDate());
             pstmt.setTimestamp(1, timestamp);
 
@@ -146,6 +152,7 @@ public class TransactionsDaoImpl implements TransactionsDao{
             con = DataSource.getConnection();
             pstmt = con.prepareStatement("UPDATE Transactions SET transactionDate = ?"
                     + " WHERE transactionID = ?");
+            
             //convert LocalDateTime to Timestamp for the SQL query
             java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf(transaction.getTransactionDate());
             pstmt.setTimestamp(1, timestamp);

@@ -15,6 +15,9 @@ public class Transactions {
     
     private Integer transactionID;
     private LocalDateTime transactionDate;
+    private Users user;
+    private City city;
+    private UserType userType;
 
     public Integer getTransactionID() {
         return transactionID;
@@ -32,7 +35,27 @@ public class Transactions {
         this.transactionDate = transactionDate;
     }
     
-    
-    
-    
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
 }

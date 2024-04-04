@@ -14,7 +14,7 @@ import model.UserType;
 
 /**
  *
- * @author Brian
+ * @author Brian, Yasaman
  */
 public class UserTypeDaoImpl implements UserTypeDao {
 
