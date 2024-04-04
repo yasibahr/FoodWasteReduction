@@ -35,7 +35,7 @@ public class FoodItemDaoImpl implements FoodItemDao{
             foodItems = new ArrayList<FoodItem>();
             while (rs.next()) {
                 FoodItem foodItem = new FoodItem();
-                foodItem.setFoodID(new Integer(rs.getInt("foodID")));
+                foodItem.setFoodID(rs.getInt("foodID"));
                 foodItem.setFoodName(rs.getString("foodName"));
                 foodItem.setExpirationDate(rs.getDate("expirationDate"));
                 foodItem.setPrice(rs.getFloat("price"));

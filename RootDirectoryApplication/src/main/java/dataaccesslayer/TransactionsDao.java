@@ -13,7 +13,7 @@ import model.Transactions;
  */
 public interface TransactionsDao {
     
-        List<Transactions> getAllTransactions();
+        List<Transactions> getAllTransactions() throws SQLException, IOException;
 	Transactions getTransactionByTransactionID(Integer transactionID);
 	void addTransaction(Transactions transaction);
 	void updateTransaction(Transactions transaction);

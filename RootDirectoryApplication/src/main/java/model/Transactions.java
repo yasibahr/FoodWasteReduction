@@ -5,6 +5,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 public class Transactions {
     
     private Integer transactionID;
-    private LocalDate transactionDate;
+    private LocalDateTime transactionDate;
 
     public Integer getTransactionID() {
         return transactionID;
@@ -23,11 +24,11 @@ public class Transactions {
         this.transactionID = transactionID;
     }
 
-    public LocalDate getTransactionDate() {
+    public LocalDateTime getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(LocalDate transactionDate) {
+    public void setTransactionDate(LocalDateTime transactionDate) {
         this.transactionDate = transactionDate;
     }
     
