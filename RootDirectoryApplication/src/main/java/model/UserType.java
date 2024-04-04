@@ -10,14 +10,14 @@ package model;
  */
 public class UserType {
     
-    private String userTypeID;
+    private Integer userTypeID;
     private String userType;
 
-    public String getUserTypeID() {
+    public Integer getUserTypeID() {
         return userTypeID;
     }
 
-    public void setUserTypeID(String userTypeID) {
+    public void setUserTypeID(Integer userTypeID) {
         this.userTypeID = userTypeID;
     }
 
