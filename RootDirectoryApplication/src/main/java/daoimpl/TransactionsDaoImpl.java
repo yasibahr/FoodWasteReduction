@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dataaccesslayer;
+package daoimpl;
 
+import connection.DataSource;
+import dao.TransactionsDao;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,13 +16,10 @@ import java.util.Properties;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author Brian
+ * @author Yasaman, Brian
  */
 public class TransactionsDaoImpl implements TransactionsDao{
     private Properties dbProperties;
@@ -41,7 +40,7 @@ public class TransactionsDaoImpl implements TransactionsDao{
         try{
             con = DataSource.getConnection();
             
-            String query = "SELECT * FROM Transactions ORDER BY TransactionsID";
+            String query = "SELECT * FROM Transactions ORDER BY transactionID";
             pstmt = con.prepareStatement(query);
             rs=pstmt.executeQuery();
             allTransactions = new ArrayList<Transactions>();
@@ -56,65 +55,132 @@ public class TransactionsDaoImpl implements TransactionsDao{
                 LocalDateTime transactionDate = dbTimestamp != null ? dbTimestamp.toLocalDateTime() : null;
                 transaction.setTransactionDate(transactionDate);
 
-                allTransactions.add(transaction);
-            
+                allTransactions.add(transaction); 
             }
-        } catch (SQLException ex) {
-            throw new SQLException("Cannot create new transaction due to issues with SQL.");
-//            Logger.getLogger(TransactionsDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new SQLException("Cannot create new transaction due to issues with SQL.", e);
         } catch (IOException ex) {
-            Logger.getLogger(TransactionsDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IOException("Cannot create new transaction due to Input/Output.", ex);
         } 
-        return null;
-        
+        return allTransactions;
     }
 
+    /**
+     * 
+     * @param transactionID
+     * @return
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
-    public Transactions getTransactionByTransactionID(Integer transactionID) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void addTransaction(Transactions transaction) {
+    public Transactions getTransactionByTransactionID(Integer transactionID) throws SQLException, IOException  {
         Connection con = null;
         PreparedStatement pstmt = null;
-        try {
-            DataSource ds = new DataSource();
-            con = ds.createConnection();
-            pstmt = con.prepareStatement(
-                    "INSERT INTO \"\" (\"\", \"\") "
-                    + "VALUES(?, ?)");
-            pstmt.setString(1, .get());
-            pstmt.setString(2, .get());
-            pstmt.executeUpdate();
+        ResultSet rs = null;
+        Transactions transaction = null;
+        
+        try{
+            con = DataSource.getConnection();
+            
+            pstmt = con.prepareStatement("SELECT * FROM Transactions WHERE transactionID = ?");
+            pstmt.setInt(1, transactionID);
+            rs=pstmt.executeQuery();
+                       
+            while (rs.next()){
+                transaction = new Transactions();
+                transaction.setTransactionID(rs.getInt("transactionID")); //get id and set id in DTO
+                
+                //retrieve transactionDate from rs and store it
+                java.sql.Timestamp timestamp = rs.getTimestamp("transactionDate"); //get transactionDate
+                LocalDateTime transactionDate = timestamp != null ? timestamp.toLocalDateTime() : null;
+                transaction.setTransactionDate(transactionDate); //now can set transactionDate
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-    }
-
-    @Override
-    public void updateTransaction(Transactions transaction) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void deleteTransaction(Transactions transaction) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            throw new SQLException("Cannot create new transaction due to issues with SQL.", e);
+        } catch (IOException ex) {
+            throw new IOException("Cannot create new transaction due to Input/Output.", ex);
+        } 
+        return transaction;
     }
     
+    /**
+     * 
+     * @param transaction
+     * @throws SQLException
+     * @throws IOException 
+     */
+    @Override
+    public void addTransaction(Transactions transaction) throws SQLException, IOException{
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        
+        try{
+            con = DataSource.getConnection();
+
+            pstmt = con.prepareStatement("INSERT INTO transaction (transactionDate "
+                    + "VALUES (?)");
+            //convert LocalDateTime to Timestamp for the SQL query
+            java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf(transaction.getTransactionDate());
+            pstmt.setTimestamp(1, timestamp);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+                throw new SQLException("Cannot add new transaction because of issues with SQL.", e);
+        } catch (IOException ex) {
+            throw new IOException("Cannot add new transaction due to Input/Output.", ex);
+        } 
+    } 
+        
+    /**
+     * 
+     * @param transaction
+     * @throws SQLException
+     * @throws IOException 
+     */
+    @Override
+    public void updateTransaction(Transactions transaction) throws SQLException, IOException{
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        
+        try{
+            con = DataSource.getConnection();
+            pstmt = con.prepareStatement("UPDATE Transactions SET transactionDate = ?"
+                    + " WHERE transactionID = ?");
+            //convert LocalDateTime to Timestamp for the SQL query
+            java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf(transaction.getTransactionDate());
+            pstmt.setTimestamp(1, timestamp);
+               
+            pstmt.setInt(2, transaction.getTransactionID().intValue()); //where ID is...
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+                throw new SQLException("Cannot update transaction because of issues with SQL.", e);
+        } catch (IOException ex) {
+            throw new IOException("Cannot update transaction due to Input/Output.", ex);
+        } 
+    } 
+
+    /**
+     * 
+     * @param transaction
+     * @throws SQLException
+     * @throws IOException 
+     */
+    @Override
+    public void deleteTransaction(Transactions transaction) throws SQLException, IOException{
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        
+        try{
+            con = DataSource.getConnection();
+
+            pstmt = con.prepareStatement("DELETE FROM Transactions WHERE transactionID = ?");
+            pstmt.setInt(1, transaction.getTransactionID());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+                throw new SQLException("Cannot delete transaction because of issues with SQL.", e);
+        } catch (IOException ex) {
+            throw new IOException("Cannot delete transaction due to Input/Output.", ex);
+        } 
+    } 
 }

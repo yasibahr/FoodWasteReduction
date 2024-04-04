@@ -4,26 +4,43 @@
  */
 package businesslayer;
 
+import dao.UsersDao;
+import daoimpl.UsersDaoImpl;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import model.Users;
 
 /**
  *
- * @author Brian
+ * @author Brian, Yasaman
  */
 public class UsersBusinessLogic {
     
-    private UsersDaoImpl usersDao = null;
+    private UsersDao usersDao = null;
 
     public UsersBusinessLogic() {
         usersDao = new UsersDaoImpl();
     }
 
-    public List<User> getAllUsers() throws SQLException {
-        return usersDao.getAll();
+    public List<Users> getAllUsers() throws SQLException, IOException {
+        return usersDao.getAllUsers();
     }
 
-    public void addUser(User user) {
+    public Users getUserByUserID(Integer userID) throws SQLException, IOException {
+        return usersDao.getUserByUserID(userID);
+    }
+    
+    public void addUser(Users user) throws SQLException, IOException {
         usersDao.addUser(user);
     }
+    
+    public void updateUser(Users user) throws SQLException, IOException{
+        usersDao.updateUser(user);
+    }
+    
+    public void deleteUser(Users user) throws SQLException, IOException{
+        usersDao.deleteUser(user);
+    }
+    
 }

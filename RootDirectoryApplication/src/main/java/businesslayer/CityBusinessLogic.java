@@ -4,28 +4,43 @@
  */
 package businesslayer;
 
-import dataaccesslayer.CityDaoImpl;
+import dao.CityDao;
+import daoimpl.CityDaoImpl;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import model.City;
+import model.Transactions;
 
 /**
  *
- * @author Brian
+ * @author Brian, Yasaman
  */
 public class CityBusinessLogic {
     
-    private CityDaoImpl cityDao = null;
+    private CityDao cityDao = null;
 
     public CityBusinessLogic() {
         cityDao = new CityDaoImpl();
     }
 
-    public List<City> getAllCities() throws SQLException {
+    public List<City> getAllCities() throws SQLException, IOException {
         return cityDao.getAllCities();
     }
 
-    public void addCity(City city) {
+    public City getCityByCityID(Integer cityID) throws SQLException, IOException {
+        return cityDao.getCityByCityID(cityID);
+    }
+    
+    public void addCity(City city) throws SQLException, IOException{
         cityDao.addCity(city);
     }
+    public void updateCity(City city) throws SQLException, IOException{
+        cityDao.updateCity(city);
+    }
+    
+    public void deleteCity(City city) throws SQLException, IOException{
+        cityDao.deleteCity(city);
+    }
+    
 }
