@@ -7,21 +7,23 @@ package model;
 
 /**
  *
- * @author Brian
+ * @author Brian, Yasaman
  */
 public class Users {
     
-    private String userID;
+    private Integer userID;
     private String userName;
     private String password;
     private String email;
     private String phone;
+    private Integer userTypeID;
+    private Integer cityID;
 
-    public String getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
@@ -57,5 +59,19 @@ public class Users {
         this.phone = phone;
     }
     
-    
+    public Integer getUserTypeID() {
+        return userTypeID;
+    }
+
+    public void setUserTypeID(Integer userTypeID) {
+        this.userTypeID = userTypeID;
+    }
+
+    public Integer getCityID() {
+        return cityID;
+    }
+
+    public void setCityID(Integer cityID) {
+        this.cityID = cityID;
+    }
 }

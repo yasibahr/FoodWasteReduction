@@ -10,23 +10,23 @@ package model;
  */
 public class StatusType {
     
-    private String statusTypeID;
-    private String statusType;
+    private Integer statusTypeID;
+    private String statusTypeName;
 
-    public String getStatusTypeID() {
+    public Integer getStatusTypeID() {
         return statusTypeID;
     }
 
-    public void setStatusTypeID(String statusTypeID) {
+    public void setStatusTypeID(Integer statusTypeID) {
         this.statusTypeID = statusTypeID;
     }
 
-    public String getStatusType() {
-        return statusType;
+    public String getStatusTypeName() {
+        return statusTypeName;
     }
 
-    public void setStatusType(String statusType) {
-        this.statusType = statusType;
+    public void setStatusTypeName(String statusTypeName) {
+        this.statusTypeName = statusTypeName;
     }
     
     

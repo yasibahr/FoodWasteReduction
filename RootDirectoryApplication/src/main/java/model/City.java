@@ -10,24 +10,24 @@ package model;
  */
 public class City {
     
-    private String cityID;
-    private String city;
+    private Integer cityID;
+    private String cityName;
     private String country;
 
-    public String getCityID() {
+    public int getCityID() {
         return cityID;
     }
 
-    public void setCityID(String cityID) {
+    public void setCityID(Integer cityID) {
         this.cityID = cityID;
     }
 
-    public String getCity() {
-        return city;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityName(String city) {
+        this.cityName = city;
     }
 
     public String getCountry() {
