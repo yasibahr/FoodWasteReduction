@@ -44,7 +44,11 @@ public class TransactionsDaoImpl implements TransactionsDao{
         try{
             con = DataSource.getConnection();
             
-            pstmt = con.prepareStatement("SELECT * FROM Transactions ORDER BY transactionID");
+            pstmt = con.prepareStatement("SELECT "
+                    + "transactionID, "
+                    + "transactionDate "
+                    + "FROM Transactions "
+                    + "ORDER BY transactionID");
             rs=pstmt.executeQuery();
             allTransactions = new ArrayList<Transactions>();
             
@@ -85,7 +89,11 @@ public class TransactionsDaoImpl implements TransactionsDao{
         try{
             con = DataSource.getConnection();
             
-            pstmt = con.prepareStatement("SELECT * FROM Transactions WHERE transactionID = ?");
+            pstmt = con.prepareStatement("SELECT "
+                    + "transactionID, "
+                    + "transactionDate "
+                    + "FROM Transactions "
+                    + "WHERE transactionID = ?");
             pstmt.setInt(1, transactionID);
             
             rs=pstmt.executeQuery();
@@ -122,7 +130,8 @@ public class TransactionsDaoImpl implements TransactionsDao{
         try{
             con = DataSource.getConnection();
 
-            pstmt = con.prepareStatement("INSERT INTO Transactions (transactionDate) "
+            pstmt = con.prepareStatement("INSERT INTO Transactions "
+                    + "(transactionDate) "
                     + "VALUES (?)");
             
 //convert LocalDateTime to Timestamp for the SQL query
@@ -150,7 +159,8 @@ public class TransactionsDaoImpl implements TransactionsDao{
         
         try{
             con = DataSource.getConnection();
-            pstmt = con.prepareStatement("UPDATE Transactions SET transactionDate = ?"
+            pstmt = con.prepareStatement("UPDATE Transactions SET "
+                    + "transactionDate = ?"
                     + " WHERE transactionID = ?");
             
             //convert LocalDateTime to Timestamp for the SQL query
@@ -181,7 +191,8 @@ public class TransactionsDaoImpl implements TransactionsDao{
         try{
             con = DataSource.getConnection();
 
-            pstmt = con.prepareStatement("DELETE FROM Transactions WHERE transactionID = ?");
+            pstmt = con.prepareStatement("DELETE FROM Transactions "
+                    + "WHERE transactionID = ?");
             pstmt.setInt(1, transaction.getTransactionID());
             pstmt.executeUpdate();
         } catch (SQLException e) {

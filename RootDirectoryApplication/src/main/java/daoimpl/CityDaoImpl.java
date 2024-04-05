@@ -39,23 +39,33 @@ public class CityDaoImpl implements CityDao{
         try{
             con = DataSource.getConnection();
             
-            pstmt = con.prepareStatement("SELECT cityID, cityName, country FROM City ORDER BY cityID");
-            rs=pstmt.executeQuery();
+            pstmt = con.prepareStatement("SELECT "
+                    + "cityID, "
+                    + "cityName, "
+                    + "country "
+                    + "FROM City "
+                    + "ORDER BY cityID");
+            
+            rs=pstmt.executeQuery(); //execute query and store result in rs
+            
             allCities = new ArrayList<City>();
             
+            //converts each row of the rs int a City object
             while (rs.next()){
                 City city = new City();
+                
+                city.setCityID(rs.getInt("cityID"));
 
                 city.setCityName(rs.getString("cityName"));
 
                 city.setCountry(rs.getString("country"));
 
-                allCities.add(city);
+                allCities.add(city); //results in many cities if there are many rows from DB (rs)
             }
         } catch (SQLException e) {
-            throw new SQLException("Cannot create new city due to issues with SQL.", e);
+            throw new SQLException("Cannot get all cities due to issues with SQL.", e);
         } catch (IOException ex) {
-            throw new IOException("Cannot create new city due to Input/Output.", ex);
+            throw new IOException("Cannot get all cities due to Input/Output.", ex);
         } 
         return allCities;
     }
@@ -77,7 +87,13 @@ public class CityDaoImpl implements CityDao{
         try{
             con = DataSource.getConnection();
             
-            pstmt = con.prepareStatement("SELECT cityID, cityName, country FROM City WHERE cityID = ?");
+            pstmt = con.prepareStatement("SELECT "
+                    + "cityID, "
+                    + "cityName, "
+                    + "country "
+                    + "FROM City "
+                    + "WHERE cityID = ?");
+            
             pstmt.setInt(1, cityID);
 
             rs=pstmt.executeQuery();
@@ -92,9 +108,9 @@ public class CityDaoImpl implements CityDao{
                 city.setCountry(rs.getString("country"));
             }
         } catch (SQLException e) {
-            throw new SQLException("Cannot create new city due to issues with SQL.", e);
+            throw new SQLException("Cannot get city by id due to issues with SQL.", e);
         } catch (IOException ex) {
-            throw new IOException("Cannot create new city due to Input/Output.", ex);
+            throw new IOException("Cannot get city by id due to Input/Output.", ex);
         } 
         return city;
     }
@@ -113,13 +129,16 @@ public class CityDaoImpl implements CityDao{
         try{
             con = DataSource.getConnection();
 
-            pstmt = con.prepareStatement("INSERT INTO City (cityName, country) "
+            pstmt = con.prepareStatement("INSERT INTO City "
+                    + "(cityName, "
+                    + "country) "
                     + "VALUES (?, ?)");
 
             pstmt.setString(1, city.getCityName());
             pstmt.setString(2, city.getCountry());
 
             pstmt.executeUpdate();
+            
         } catch (SQLException e) {
                 throw new SQLException("Cannot add new city because of issues with SQL.", e);
         } catch (IOException ex) {
@@ -140,7 +159,9 @@ public class CityDaoImpl implements CityDao{
         
         try{
             con = DataSource.getConnection();
-            pstmt = con.prepareStatement("UPDATE City SET cityName = ?, country = ?"
+            pstmt = con.prepareStatement("UPDATE City SET "
+                    + "cityName = ?, "
+                    + "country = ?"
                     + " WHERE cityID = ?");
             
             pstmt.setString(1, city.getCityName());
@@ -171,7 +192,8 @@ public class CityDaoImpl implements CityDao{
         try{
             con = DataSource.getConnection();
 
-            pstmt = con.prepareStatement("DELETE FROM City WHERE cityID = ?");
+            pstmt = con.prepareStatement("DELETE FROM City "
+                    + "WHERE cityID = ?");
             
             pstmt.setInt(1, city.getCityID());
             
@@ -181,6 +203,7 @@ public class CityDaoImpl implements CityDao{
         } catch (IOException ex) {
             throw new IOException("Cannot delete city due to Input/Output.", ex);
         } 
+    }
 //        finally {
 //            try {
 //                if (pstmt != null) {
@@ -196,5 +219,4 @@ public class CityDaoImpl implements CityDao{
 //            } catch (SQLException ex) {
 //            }
 //        }
-    } 
 }

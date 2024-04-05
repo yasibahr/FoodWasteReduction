@@ -6,6 +6,7 @@ package daoimpl;
 
 import connection.DataSource;
 import dao.FoodItemDao;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -20,125 +21,144 @@ import model.FoodItem;
  * @author Brian, Yasaman
  */
 public class FoodItemDaoImpl implements FoodItemDao{
+    ArrayList<FoodItem> allFoodItems = null;
 
+    /**
+     * Empty constructor 
+     */
+    public FoodItemDaoImpl() {}
+    
+    /**
+     * 
+     * @return 
+     */
     @Override
-    public List<FoodItem> getAllFoodItems() {
-        
+    public List<FoodItem> getAllFoodItems() throws SQLException, IOException {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        ArrayList<FoodItem> foodItems = null;
+        
         try {
-            DataSource ds = new DataSource();
-            con = ds.createConnection();
-            pstmt = con.prepareStatement(
-                    "SELECT foodID, foodName, expierationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID FROM Food_Items ORDER BY foodID");
+            con = DataSource.getConnection();
+            
+            pstmt = con.prepareStatement("SELECT "
+                    + "foodID, "
+                    + "foodName, "
+                    + "expirationDate, "
+                    + "price, "
+                    + "quantity, "
+                    + "statusTypeID, "
+                    + "transactionID, "
+                    + "userID, "
+                    + "userTypeID "
+                    + "FROM Food_Items "
+                    + "ORDER BY foodID");
             rs = pstmt.executeQuery();
-            foodItems = new ArrayList<FoodItem>();
+            
+            allFoodItems = new ArrayList<FoodItem>();
+            
             while (rs.next()) {
                 FoodItem foodItem = new FoodItem();
+                
                 foodItem.setFoodID(rs.getInt("foodID"));
                 foodItem.setFoodName(rs.getString("foodName"));
                 foodItem.setExpirationDate(rs.getDate("expirationDate"));
                 foodItem.setPrice(rs.getFloat("price"));
                 foodItem.setQuantity(rs.getInt("quantity"));
                 foodItem.setStatusTypeID(rs.getInt("statusTypeID"));
-                foodItem.setStatusTypeID(rs.getInt("transactionID"));
-                foodItem.setStatusTypeID(rs.getInt("userID"));
-                foodItem.setStatusTypeID(rs.getInt("userTypeID"));
-                foodItems.add(foodItem);
+                foodItem.setTransactionID(rs.getInt("transactionID"));
+                foodItem.setUserID(rs.getInt("userID"));
+                foodItem.setUserTypeID(rs.getInt("userTypeID"));
+                
+                allFoodItems.add(foodItem);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-        return foodItems;
+            throw new SQLException("Cannot get all food items due to issues with SQL.", e);
+        } catch (IOException ex) {
+            throw new IOException("Cannot get all food items due to Input/Output.", ex);
+        } 
+        return allFoodItems;
     }
 
+    /**
+     * 
+     * @param foodID
+     * @return
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
-    public FoodItem getFoodItemByFoodItemID(Integer foodID) {
-         Connection con = null;
+    public FoodItem getFoodItemByFoodItemID(Integer foodID) throws SQLException, IOException {
+        Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         FoodItem foodItem = null;
+        
         try {
-            DataSource ds = new DataSource();
-            con = ds.createConnection();
-            pstmt = con.prepareStatement(
-                    "SELECT foodID, foodName, expierationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID FROM Food_Item WHERE foodID = ?");
-            pstmt.setInt(1, foodID.intValue());
-            rs = pstmt.executeQuery();
+            con = DataSource.getConnection();
+            
+            pstmt = con.prepareStatement("SELECT "
+                    + "foodID, "
+                    + "foodName, "
+                    + "expierationDate, "
+                    + "price, quantity, "
+                    + "statusTypeID, "
+                    + "transactionID, "
+                    + "userID, "
+                    + "userTypeID, "
+                    + "cityID "
+                    + "FROM Food_Item "
+                    + "WHERE foodID = ?");
+            
+            pstmt.setInt(1, foodID);
+            
+            rs=pstmt.executeQuery();
+            
             while (rs.next()) {
                 foodItem = new FoodItem();
-                foodItem.setFoodID(new Integer(rs.getInt("foodID")));
+                foodItem.setFoodID(rs.getInt("foodID"));
                 foodItem.setFoodName(rs.getString("foodName"));
                 foodItem.setExpirationDate(rs.getDate("expirationDate"));
                 foodItem.setPrice(rs.getFloat("price"));
                 foodItem.setQuantity(rs.getInt("quantity"));
                 foodItem.setStatusTypeID(rs.getInt("statusTypeID"));
-                foodItem.setStatusTypeID(rs.getInt("transactionID"));
-                foodItem.setStatusTypeID(rs.getInt("userID"));
-                foodItem.setStatusTypeID(rs.getInt("userTypeID"));
+                foodItem.setTransactionID(rs.getInt("transactionID"));
+                foodItem.setUserID(rs.getInt("userID"));
+                foodItem.setUserTypeID(rs.getInt("userTypeID"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            throw new SQLException("Cannot get food item by id due to issues with SQL.", e);
+        } catch (IOException ex) {
+            throw new IOException("Cannot get food item by id due to Input/Output.", ex);
         }
         return foodItem;
     }
 
+    /**
+     * 
+     * @param foodItem
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
-    public void addFoodItem(FoodItem foodItem) {
+    public void addFoodItem(FoodItem foodItem) throws SQLException, IOException {
         Connection con = null;
         PreparedStatement pstmt = null;
+        
         try {
-            DataSource ds = new DataSource();
-            con = ds.createConnection();
-            pstmt = con.prepareStatement(
-                    "INSERT INTO \"Food_Item\" (\"foodName\", \"expirationDate\", \"price\", \"quantity\", \"statusTypeID\", \"transactionID\""
-                    + ", \"userID\", \"userTypeID\", \"cityID\") VALUES(?, ?)");
+            con = DataSource.getConnection();
+            
+            pstmt = con.prepareStatement("INSERT INTO Food_Item "
+                    + "(foodName, "
+                    + "expirationDate, "
+                    + "price, "
+                    + "quantity, "
+                    + "statusTypeID, "
+                    + "transactionID, "
+                    + "userID, "
+                    + "userTypeID, "
+                    + "cityID) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, foodItem.getFoodName());
             pstmt.setDate(2, (Date) foodItem.getExpirationDate());
             pstmt.setFloat(3, foodItem.getPrice());
@@ -148,38 +168,41 @@ public class FoodItemDaoImpl implements FoodItemDao{
             pstmt.setInt(7, foodItem.getUserID());
             pstmt.setInt(8, foodItem.getUserTypeID());
             pstmt.setInt(9, foodItem.getCityID());
+
             pstmt.executeUpdate();
+            
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
+                throw new SQLException("Cannot add new food item because of issues with SQL.", e);
+        } catch (IOException ex) {
+            throw new IOException("Cannot add new food item due to Input/Output.", ex);
+        } 
     }
 
+    /**
+     * 
+     * @param foodItem
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
-    public void updateFoodItem(FoodItem foodItem) {
+    public void updateFoodItem(FoodItem foodItem) throws SQLException, IOException {
         Connection con = null;
         PreparedStatement pstmt = null;
+        
         try {
-            DataSource ds = new DataSource();
-            con = ds.createConnection();
-            pstmt = con.prepareStatement(
-                    "UPDATE \"Food_Item\" SET \"foodName\" = ?, "
-                    + "\"expirationDate\" = ?, \"price\" = ?, \"quantity\" = ?, \"statusTypeID\" = ?, "
-                    + "\"transactionID\" = ?, \"userID\" = ?, \"userTypeID\" = ?, \"cityID\" = ? WHERE \"foodID\" = ?");
+            con = DataSource.getConnection();
+            pstmt = con.prepareStatement("UPDATE Food_Item SET "
+                    + "foodName = ?, "
+                    + "expirationDate = ?, "
+                    + "price = ?, "
+                    + "quantity = ?, "
+                    + "statusTypeID = ?, "
+                    + "transactionID = ?, "
+                    + "userID = ?, "
+                    + "userTypeID = ?, "
+                    + "cityID = ? "
+                    + "WHERE foodID = ?");
+            
             pstmt.setString(1, foodItem.getFoodName());
             pstmt.setDate(2, (Date) foodItem.getExpirationDate());
             pstmt.setFloat(3, foodItem.getPrice());
@@ -190,56 +213,40 @@ public class FoodItemDaoImpl implements FoodItemDao{
             pstmt.setInt(8, foodItem.getUserTypeID());
             pstmt.setInt(9, foodItem.getCityID());
             pstmt.setInt(10, foodItem.getFoodID());
+            
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-    }
+                throw new SQLException("Cannot update food item because of issues with SQL.", e);
+        } catch (IOException ex) {
+            throw new IOException("Cannot update food item due to Input/Output.", ex);
+        } 
+    } 
 
+    /**
+     * 
+     * @param foodItem
+     * @throws SQLException
+     * @throws IOException 
+     */
     @Override
-    public void deleteFoodItem(FoodItem foodItem) {
+    public void deleteFoodItem(FoodItem foodItem) throws SQLException, IOException {
         Connection con = null;
         PreparedStatement pstmt = null;
+        
         try {
-            DataSource ds = new DataSource();
-            con = ds.createConnection();
-            pstmt = con.prepareStatement(
-                    "DELETE FROM \"Food_Item\" WHERE \"foodID\" = ?");
+            con = DataSource.getConnection();
+
+            pstmt = con.prepareStatement("DELETE FROM "
+                    + "Food_Item "
+                    + "WHERE foodID = ?");
+            
             pstmt.setInt(1, foodItem.getFoodID());
+            
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
+                throw new SQLException("Cannot delete city because of issues with SQL.", e);
+        } catch (IOException ex) {
+            throw new IOException("Cannot delete city due to Input/Output.", ex);
+        } 
     }
-    
 }

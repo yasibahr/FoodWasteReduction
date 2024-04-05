@@ -17,11 +17,11 @@ public class FoodItem {
     private Date expirationDate;
     private float price;
     private int quantity;
-    private StatusType statusType;
-    private Transactions transaction;
-    private Users user;
-    private UserType userType;
-    private City city;
+    private Integer statusTypeID;
+    private Integer transactionID;
+    private Integer userID;
+    private Integer userTypeID;
+    private Integer cityID;
 
     public Integer getFoodID() {
         return foodID;
@@ -63,43 +63,43 @@ public class FoodItem {
         this.quantity = quantity;
     }
 
-    public StatusType getStatusType() {
-        return statusType;
+    public Integer getStatusTypeID() {
+        return statusTypeID;
     }
 
-    public void setStatusType(StatusType statusType) {
-        this.statusType = statusType;
+    public void setStatusTypeID(Integer statusTypeID) {
+        this.statusTypeID = statusTypeID;
     }
 
-    public Transactions getTransaction() {
-        return transaction;
+    public Integer getTransactionID() {
+        return transactionID;
     }
 
-    public void setTransaction(Transactions transaction) {
-        this.transaction = transaction;
+    public void setTransactionID(Integer transactionID) {
+        this.transactionID = transactionID;
     }
 
-    public Users getUser() {
-        return user;
+    public Integer getUserID() {
+        return userID;
     }
 
-    public void setUser(Users user) {
-        this.user = user;
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
-    public UserType getUserType() {
-        return userType;
+    public Integer getUserTypeID() {
+        return userTypeID;
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+    public void setUserTypeID(Integer userTypeID) {
+        this.userTypeID = userTypeID;
     }
 
-    public City getCity() {
-        return city;
+    public Integer getCityID() {
+        return cityID;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setCityID(Integer cityID) {
+        this.cityID = cityID;
     }
 }

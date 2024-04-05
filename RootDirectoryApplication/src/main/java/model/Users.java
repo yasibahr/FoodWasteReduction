@@ -16,8 +16,8 @@ public class Users {
     private String password;
     private String email;
     private String phone;
-    private UserType userType;
-    private City city;
+    private Integer userTypeID;
+    private Integer cityID;
 
     public Integer getUserID() {
         return userID;
@@ -59,19 +59,19 @@ public class Users {
         this.phone = phone;
     }
     
-    public UserType getUserType() {
-        return userType;
+    public Integer getUserTypeID() {
+        return userTypeID;
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+    public void setUserTypeID(Integer userTypeID) {
+        this.userTypeID = userTypeID;
     }
 
-    public City getCity() {
-        return city;
+    public Integer getCityID() {
+        return cityID;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setCityID(Integer cityID) {
+        this.cityID = cityID;
     }
 }
