@@ -1,6 +1,8 @@
 
 package builder;
 
+import model.FoodItem;
+
 /**
  *
  * @author Bennett Ireland
@@ -17,9 +19,9 @@ public class FoodItemDirector {
     
     FoodItem fooditem = foodBuilder.getFoodItem();
     
-    foodBuilder.FoodItemName(fooditem.getFoodItemName());
+    foodBuilder.FoodName(fooditem.getFoodName());
     foodBuilder.Quantity(fooditem.getQuantity());
-    foodBuilder.expDate(fooditem.getExpDate());
+    foodBuilder.ExpirationDate(fooditem.getExpirationDate());
     foodBuilder.Price(fooditem.getPrice());
     }
     

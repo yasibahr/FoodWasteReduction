@@ -2,6 +2,7 @@
 package builder;
 
 import java.time.LocalDate;
+import java.util.Date;
 import model.FoodItem;
 
 /**
@@ -10,32 +11,32 @@ import model.FoodItem;
  */
 public class FoodItemBuilder implements AbstractFoodItemBuilder{
 
-    private FoodItem fooditem;
+    private FoodItem foodItem;
     
     @Override
-    public void FoodItemName(String fooditemname) {
-        fooditem.setFoodItemName(fooditemname);
+    public void FoodName(String foodName) {
+        foodItem.setFoodName(foodName);
         
     }
 
     @Override
     public void Quantity(int quantity) {
-        fooditem.setQuantity(quantity);
+        foodItem.setQuantity(quantity);
     }
 
     @Override
-    public void ExpDate(LocalDate expDate) {
-        fooditem.setExpDate(expDate);
+    public void ExpirationDate(Date expirationDate) {
+        foodItem.setExpirationDate(expirationDate);
     }
 
     @Override
     public void Price(float price) {
-        fooditem.setPrice(price);
+        foodItem.setPrice(price);
     }
 
     @Override
     public FoodItem getFoodItem() {
-        return fooditem;
+        return foodItem;
     }
     
 }
