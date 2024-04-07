@@ -79,6 +79,29 @@ CREATE TABLE Food_Item(
 );
 ALTER TABLE Food_Item AUTO_INCREMENT=600;
 
+
+
+
+INSERT INTO User_Type (userType) VALUES ('admin');
+INSERT INTO User_Type (userType) VALUES ('retailor');
+INSERT INTO User_Type (userType) VALUES ('consumer');
+INSERT INTO User_Type (userType) VALUES ('charity');
+COMMIT;
+
+INSERT INTO City (cityName,country) VALUES ('Ottawa','Canada');
+INSERT INTO City (cityName,country) VALUES ('Toronto','Canada');
+INSERT INTO City (cityName,country) VALUES ('Vancouver','Canada');
+INSERT INTO City (cityName,country) VALUES ('Montreal','Canada');
+INSERT INTO City (cityName,country) VALUES ('Calgary','Canada');
+INSERT INTO City (cityName,country) VALUES ('Edmonton','Canada');
+INSERT INTO City (cityName,country) VALUES ('Quebec','Canada');
+INSERT INTO City (cityName,country) VALUES ('Halifax','Canada');
+INSERT INTO City (cityName,country) VALUES ('Winnipeg','Canada');
+INSERT INTO City (cityName,country) VALUES ('Hamilton','Canada');
+INSERT INTO City (cityName,country) VALUES ('London','Canada');
+INSERT INTO City (cityName,country) VALUES ('Victoria','Canada');
+COMMIT;
+
 select * from city;
 select * from food_item;
 select * from status_type;

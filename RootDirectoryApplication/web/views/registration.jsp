@@ -13,6 +13,7 @@
 <%@page import="model.UserType" %>
 <%@page import="daoimpl.UsersDaoImpl" %>
 <%@page import="daoimpl.UserTypeDaoImpl" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -21,30 +22,38 @@
         <title>Registration</title>
     </head>
     <body>
-        <h1>Register!</h1>
+        <h1>Register</h1>
         
         <!--Register info-->
         <form action ="RegistrationServlet" method="post">
+                <!--userName-->
                 <label for="userName">Full Name</label>
                 <input type="text" name="userName" id="userName"><br>
             
+                <!--email-->
                 <label for="email">Email Address</label> 
                 <input type="text" name="email" id="email"><br>
             
+                <!--password-->
                 <label for="password">Password</label> 
                 <input type="password" name="password" id="password"><br>                
                 
-                <label for="userType">User Type</label> <!-- *********drop down menu -->
-                <input type="text" name="userType" id="userType"><br>                
+                <!--userType dropdown-->
             
-                <label for="city">City</label> <!-- *********drop down menu -->
-                <input type="text" name="city" id="city"><br>                
-            
+                <!--city dropdown-->
+                <select name="city" id="city">
+                    <c:forEach items="${cities}" var="city">
+                        <option value="${city.id}">${city.name}</option>
+                    </c:forEach>
+                </select>       
+                
+                <!--phone-->
                 <label for="phone">Phone Number</label> 
                 <input type="text" name="phone" id="phone"><br>                
             
-                <label for="communicationMethod">Preferred Communication Method</label> 
-                <input type="text" name="communicationMethod" id="communicationMethod"><br>                
+                <!--communicationMethod dropdown-->
+
+
                 
             <input type="submit" value="register">
         </form>        
