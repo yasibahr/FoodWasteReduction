@@ -27,8 +27,8 @@ public class UsersBusinessLogic {
         return usersDao.getAllUsers();
     }
 
-    public Users getUserByUserID(Integer userID) throws SQLException, IOException {
-        return usersDao.getUserByUserID(userID);
+    public Users getUserByUserEmail(String email) throws SQLException, IOException {
+        return usersDao.getUserByUserEmail(email);
     }
     
     public void addUser(Users user) throws SQLException, IOException {

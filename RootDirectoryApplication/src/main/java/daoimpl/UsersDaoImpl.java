@@ -87,7 +87,7 @@ public class UsersDaoImpl implements UsersDao {
      * @throws IOException 
      */
     @Override
-    public Users getUserByUserID(Integer userID) throws SQLException, IOException {
+    public Users getUserByUserEmail(String email) throws SQLException, IOException {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -105,9 +105,9 @@ public class UsersDaoImpl implements UsersDao {
                     + "userTypeID, "
                     + "cityID, "
                     + "FROM Users "
-                    + "WHERE userID = ?");
+                    + "WHERE email = ?");
             
-            pstmt.setInt(1, userID);
+            pstmt.setString(1, email);
 
             rs=pstmt.executeQuery();
                        
@@ -124,9 +124,9 @@ public class UsersDaoImpl implements UsersDao {
 
             }  
         } catch (SQLException e) {
-            throw new SQLException("Cannot get user by id due to issues with SQL.", e);
+            throw new SQLException("Cannot get user by email due to issues with SQL.", e);
         } catch (IOException ex) {
-            throw new IOException("Cannot get user by id due to Input/Output.", ex);
+            throw new IOException("Cannot get user by email due to Input/Output.", ex);
         } 
         return user;
     }
