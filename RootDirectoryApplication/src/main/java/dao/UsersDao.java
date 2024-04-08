@@ -17,9 +17,11 @@ import model.Users;
 public interface UsersDao {
     
         List<Users> getAllUsers() throws SQLException, IOException;
-	Users getUserByUserID(Integer userID) throws SQLException, IOException;
-	void addUser(Users user) throws SQLException, IOException;
+	Users getUserByUserTypeID(int userTypeID) throws SQLException, IOException;
+	Users getUserByEmail(String email) throws SQLException, IOException;
+        void addUser(Users user) throws SQLException, IOException;
 	void updateUser(Users user) throws SQLException, IOException;
 	void deleteUser(Users user) throws SQLException, IOException;
+        Users validateUser(String email, String password) throws SQLException, IOException;
     
 }

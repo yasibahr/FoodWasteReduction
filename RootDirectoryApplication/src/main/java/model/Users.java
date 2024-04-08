@@ -18,6 +18,7 @@ public class Users {
     private String phone;
     private Integer userTypeID;
     private Integer cityID;
+    private UserType userType;
 
     public Integer getUserID() {
         return userID;
@@ -73,5 +74,13 @@ public class Users {
 
     public void setCityID(Integer cityID) {
         this.cityID = cityID;
+    }
+    
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 }

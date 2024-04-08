@@ -18,6 +18,6 @@ public interface FoodItemDao {
         List<FoodItem> getAllFoodItems() throws SQLException, IOException;
 	FoodItem getFoodItemByFoodItemID(Integer foodID) throws SQLException, IOException;
 	void addFoodItem(FoodItem foodItem) throws SQLException, IOException;
-	void updateFoodItem(FoodItem foodItem) throws SQLException, IOException;
+	void updateFoodItemByStatusTypeID(FoodItem foodItem, Integer statusTypeID) throws SQLException, IOException;
 	void deleteFoodItem(FoodItem foodItem) throws SQLException, IOException;
 }

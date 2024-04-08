@@ -5,82 +5,98 @@ package controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import dao.UsersDao;
+import daoimpl.UsersDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.UserType;
+import model.Users;
+import org.apache.logging.log4j.LogManager;
 
 /**
  *
- * @author ybahr
+ * @author Yasaman
  */
 public class LoginServlet extends HttpServlet {
+    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(LoginServlet.class);
+    private UsersDao usersDao;
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * 
+     * @throws ServletException 
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    public void init() throws ServletException {
+        super.init();
+        this.usersDao = new UsersDaoImpl(); //initialize DAO per servlet lifecycle
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        logger.info("Received POST request from " + request.getRemoteAddr());
+
+        String email = request.getParameter("email"); //get email from request
+        String password = request.getParameter("password"); //get password request
+            
+        //try to authenticate user
+        try {
+            Users user = usersDao.getUserByEmail(email); //use email to get user
+            logger.debug("Processing request for email: " + email);
+
+            
+            if (user != null) {
+                logger.debug("User is not null");
+                int userType = user.getUserTypeID(); //returns userTypeID
+
+                request.getSession().setAttribute("user", user); //set user
+
+                // Redirect based on user role or other attributes
+                switch (userType) {
+                    case 101:
+                        response.sendRedirect("RetailerServlet"); //redirect to servlet which will handle data prep
+                        break;
+                    case 102:
+                        response.sendRedirect("ConsumerServlet");
+                        break;
+                    case 103:
+                        response.sendRedirect("CharityServlet");
+                        break;
+                    default:
+                        response.sendRedirect("LoginServlet"); 
+                        break;
+                }
+            } else {                 
+                logger.warn("Authentication failed for email: " + email); //user not found, redirect to an error page
+                request.setAttribute("errorMessage", "Invalid Email or Password");
+                request.getRequestDispatcher("views/errorPage.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            logger.error("Exception processing POST request", e);
+            e.printStackTrace();
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", "Login processing failed. Please try again: " + e.getMessage());
+            request.getRequestDispatcher("views/errorPage.jsp").forward(request, response); //redirect to error page
+        }
+
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
+

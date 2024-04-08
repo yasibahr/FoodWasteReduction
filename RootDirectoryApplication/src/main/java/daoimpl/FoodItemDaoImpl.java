@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.FoodItem;
+import model.StatusType;
 
 /**
  *
@@ -42,17 +43,21 @@ public class FoodItemDaoImpl implements FoodItemDao{
             con = DataSource.getConnection();
             
             pstmt = con.prepareStatement("SELECT "
-                    + "foodID, "
-                    + "foodName, "
-                    + "expirationDate, "
-                    + "price, "
-                    + "quantity, "
-                    + "statusTypeID, "
-                    + "transactionID, "
-                    + "userID, "
-                    + "userTypeID "
-                    + "FROM Food_Items "
-                    + "ORDER BY foodID");
+                    + "Food_Item.foodID, "
+                    + "Food_Item.foodName, "
+                    + "Food_Item.expirationDate, "
+                    + "Food_Item.price, "
+                    + "Food_Item.quantity, "
+                    + "Food_Item.statusTypeID, "
+                    + "Food_Item.transactionID, "
+                    + "Food_Item.userID, "
+                    + "Food_Item.userTypeID, "
+                    + "Food_Item.cityID, "
+                    + "Status_Type.statusTypeName "
+                    + "FROM Food_Item "
+                    + "JOIN Status_Type "
+                    + "ON Food_Item.statusTypeID = Status_Type.statusTypeID "
+                    + "ORDER BY Food_Item.foodID");
             rs = pstmt.executeQuery();
             
             allFoodItems = new ArrayList<FoodItem>();
@@ -65,10 +70,14 @@ public class FoodItemDaoImpl implements FoodItemDao{
                 foodItem.setExpirationDate(rs.getDate("expirationDate"));
                 foodItem.setPrice(rs.getFloat("price"));
                 foodItem.setQuantity(rs.getInt("quantity"));
-                foodItem.setStatusTypeID(rs.getInt("statusTypeID"));
                 foodItem.setTransactionID(rs.getInt("transactionID"));
                 foodItem.setUserID(rs.getInt("userID"));
                 foodItem.setUserTypeID(rs.getInt("userTypeID"));
+                
+                StatusType statusType = new StatusType();
+                statusType.setStatusTypeID(rs.getInt("statusTypeID"));
+                statusType.setStatusTypeName(rs.getString("statusTypeName"));
+                foodItem.setStatusType(statusType);
                 
                 allFoodItems.add(foodItem);
             }
@@ -100,7 +109,7 @@ public class FoodItemDaoImpl implements FoodItemDao{
             pstmt = con.prepareStatement("SELECT "
                     + "foodID, "
                     + "foodName, "
-                    + "expierationDate, "
+                    + "expirationDate, "
                     + "price, quantity, "
                     + "statusTypeID, "
                     + "transactionID, "
@@ -185,34 +194,19 @@ public class FoodItemDaoImpl implements FoodItemDao{
      * @throws IOException 
      */
     @Override
-    public void updateFoodItem(FoodItem foodItem) throws SQLException, IOException {
+    public void updateFoodItemByStatusTypeID(FoodItem foodItem, Integer statusTypeID) throws SQLException, IOException {
         Connection con = null;
         PreparedStatement pstmt = null;
         
         try {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement("UPDATE Food_Item SET "
-                    + "foodName = ?, "
-                    + "expirationDate = ?, "
-                    + "price = ?, "
-                    + "quantity = ?, "
-                    + "statusTypeID = ?, "
-                    + "transactionID = ?, "
-                    + "userID = ?, "
-                    + "userTypeID = ?, "
-                    + "cityID = ? "
+                    + "statusTypeID = ? "
                     + "WHERE foodID = ?");
             
-            pstmt.setString(1, foodItem.getFoodName());
-            pstmt.setDate(2, (Date) foodItem.getExpirationDate());
-            pstmt.setFloat(3, foodItem.getPrice());
-            pstmt.setInt(4, foodItem.getQuantity());
-            pstmt.setInt(5, foodItem.getStatusTypeID());
-            pstmt.setInt(6, foodItem.getTransactionID());
-            pstmt.setInt(7, foodItem.getUserID());
-            pstmt.setInt(8, foodItem.getUserTypeID());
-            pstmt.setInt(9, foodItem.getCityID());
-            pstmt.setInt(10, foodItem.getFoodID());
+            pstmt.setInt(1, foodItem.getStatusTypeID());
+
+            pstmt.setInt(2, foodItem.getFoodID());
             
             pstmt.executeUpdate();
         } catch (SQLException e) {
