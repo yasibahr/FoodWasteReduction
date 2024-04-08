@@ -48,26 +48,54 @@ public class DataSource {
      * @throws IOException 
      */
     private static String[] openPropsFile() throws IOException {
-        Properties props = new Properties();
 
-        try (InputStream in = Files.newInputStream(Paths.get("./src/main/res/database.properties"))) {
-            props.load(in);
-        } catch (IOException e) {
-            throw new IOException ("Could not retrieve database.properties information");
+    Properties props = new Properties();
+    // Use the class loader to find the database.properties file in the classpath
+    try (InputStream in = DataSource.class.getClassLoader().getResourceAsStream("database.properties")) {
+        if (in == null) {
+            throw new IOException("database.properties file not found in classpath");
         }
-
-        String connectionString = "jdbc:" + props.getProperty("db") + "://" + 
-                props.getProperty("host") + ":" + 
-                props.getProperty("port") + "/" + 
-                props.getProperty("name");
-        String username = props.getProperty("user");
-        String password = props.getProperty("pass");
-
-        String[] info = new String[3];
-        info[0] = connectionString; //"jdbc:mysql://localhost:3306/lab2"
-        info[1] = username; // "root"
-        info[2] = password; // "algonquin"
-
-        return info;
+        props.load(in);
+    } catch (IOException e) {
+        throw new IOException("Could not retrieve database.properties information", e);
     }
+
+    String connectionString = "jdbc:" + props.getProperty("db") + "://" + 
+            props.getProperty("host") + ":" + 
+            props.getProperty("port") + "/" + 
+            props.getProperty("name");
+    String username = props.getProperty("user");
+    String password = props.getProperty("pass");
+
+    String[] info = new String[3];
+    info[0] = connectionString;
+    info[1] = username;
+    info[2] = password;
+
+    return info;
+}
+//        Properties props = new Properties();
+//
+//        
+//        try (InputStream in = Files.newInputStream(Paths.get("src/main/res/database.properties"))) {
+//            props.load(in);
+//        } catch (IOException e) {
+//            throw new IOException ("Could not retrieve database.properties information");
+//        }
+//
+//        String connectionString = "jdbc:" + props.getProperty("db") + "://" + 
+//                props.getProperty("host") + ":" + 
+//                props.getProperty("port") + "/" + 
+//                props.getProperty("name");
+//        String username = props.getProperty("user");
+//        String password = props.getProperty("pass");
+//
+//        String[] info = new String[3];
+//        info[0] = connectionString; //"jdbc:mysql://localhost:3306/lab2"
+//        info[1] = username; // "root"
+//        info[2] = password; // "algonquin"
+//
+//        return info;
+//    }       
+        
 }

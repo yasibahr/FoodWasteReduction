@@ -5,81 +5,98 @@ package controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import dao.UsersDao;
+import daoimpl.UsersDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.UserType;
 import model.Users;
+import org.apache.logging.log4j.LogManager;
 
 /**
  *
  * @author Yasaman
  */
 public class LoginServlet extends HttpServlet {
+    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(LoginServlet.class);
+    private UsersDao usersDao;
 
-//    /**
-//     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-//     * methods.
-//     *
-//     * @param request servlet request
-//     * @param response servlet response
-//     * @throws ServletException if a servlet-specific error occurs
-//     * @throws IOException if an I/O error occurs
-//     */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//    }
-//
-//    /**
-//     * Handles the HTTP <code>GET</code> method.
-//     *
-//     * @param request servlet request
-//     * @param response servlet response
-//     * @throws ServletException if a servlet-specific error occurs
-//     * @throws IOException if an I/O error occurs
-//     */
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        
-//        //forward to login from jsp page
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
-//        dispatcher.forward(request,response);
-//    }    
-    
     /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * 
+     * @throws ServletException 
+     */
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        this.usersDao = new UsersDaoImpl(); //initialize DAO per servlet lifecycle
+    }
+
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-    
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-        boolean validate = true; //************************************
-        if(validate){
-            RequestDispatcher rs = request.getRequestDispatcher("Welcome");
-            rs.forward(request, response);
-        } else{
-            out.println("Username and Password combination does not exist.");
-            RequestDispatcher rs = request.getRequestDispatcher("index.html");
-            rs.include(request,response);
+            throws ServletException, IOException {
+        logger.info("Received POST request from " + request.getRemoteAddr());
+
+        String email = request.getParameter("email"); //get email from request
+        String password = request.getParameter("password"); //get password request
+            
+        //try to authenticate user
+        try {
+            Users user = usersDao.getUserByEmail(email); //use email to get user
+            logger.debug("Processing request for email: " + email);
+
+            
+            if (user != null) {
+                logger.debug("User is not null");
+                int userType = user.getUserTypeID(); //returns userTypeID
+
+                request.getSession().setAttribute("user", user);
+
+                // Redirect based on user role or other attributes
+                switch (userType) {
+                    case 101:
+                        response.sendRedirect("views/retailer.jsp");
+                        break;
+                    case 102:
+                        response.sendRedirect("views/consumer.jsp");
+                        break;
+                    case 103:
+                        response.sendRedirect("views/charity.jsp");
+                        break;
+                    default:
+                        response.sendRedirect("index.html"); 
+                        break;
+                }
+            } else {                 
+                logger.warn("Authentication failed for email: " + email); //user not found, redirect to an error page
+                request.setAttribute("errorMessage", "Invalid Email or Password");
+                request.getRequestDispatcher("views/loginErrorPage.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            logger.error("Exception processing POST request", e);
+            e.printStackTrace();
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", "Login processing failed. Please try again: " + e.getMessage());
+            request.getRequestDispatcher("views/loginErrorPage.jsp").forward(request, response); //redirect to error page
         }
+
     }
 }
+

@@ -88,7 +88,7 @@ ALTER TABLE Food_Item AUTO_INCREMENT=600;
 
 
 INSERT INTO User_Type (userType) VALUES ('admin');
-INSERT INTO User_Type (userType) VALUES ('retailor');
+INSERT INTO User_Type (userType) VALUES ('retailer');
 INSERT INTO User_Type (userType) VALUES ('consumer');
 INSERT INTO User_Type (userType) VALUES ('charity');
 COMMIT;

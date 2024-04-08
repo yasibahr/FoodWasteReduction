@@ -17,7 +17,8 @@ It directs user requests to specific Servlets, based on the action.-->
         <!--title-->
         <div>Food Waste Reduction Platform</div>
                
-        <!--Login-->
+        <!--Login
+        Post method is preferred since more secure.-->
         <form action ="LoginServlet" method="post">
             <label for="email">Email Address:</label>
                 <input type="text" name="email" id="email"><br>
@@ -26,7 +27,10 @@ It directs user requests to specific Servlets, based on the action.-->
             <input type="submit" value="login">
         </form>
         
-        <!--Redirect to Regsiter page-->
+        
+        
+        <!--Redirect to Register page.
+        Clicking register doesn't send sensitive data so get is preferred.-->
         <form action="RegistrationServlet" method="get">
             <input type="submit" value="Register" />
         </form>

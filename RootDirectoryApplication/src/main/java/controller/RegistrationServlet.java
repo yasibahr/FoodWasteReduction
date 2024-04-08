@@ -24,7 +24,6 @@ import model.UserType;
  *
  * @author Yasaman, Brian
  */
-@WebServlet(name = "RegistrationServlet", urlPatterns = {"/RegistrationServlet"})
 public class RegistrationServlet extends HttpServlet {
 
     

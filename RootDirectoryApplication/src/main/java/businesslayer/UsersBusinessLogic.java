@@ -27,10 +27,13 @@ public class UsersBusinessLogic {
         return usersDao.getAllUsers();
     }
 
-    public Users getUserByUserEmail(String email) throws SQLException, IOException {
-        return usersDao.getUserByUserEmail(email);
+    public Users getUserByUserTypeID(int userTypeID) throws SQLException, IOException {
+        return usersDao.getUserByUserTypeID(userTypeID);
     }
     
+    public Users getUserByEmail(String email) throws SQLException, IOException {
+        return usersDao.getUserByEmail(email);
+    }    
     public void addUser(Users user) throws SQLException, IOException {
         usersDao.addUser(user);
     }
@@ -43,4 +46,7 @@ public class UsersBusinessLogic {
         usersDao.deleteUser(user);
     }
     
+    public Users validateUser(String email, String password) throws SQLException, IOException{
+        return usersDao.validateUser(email, password);
+    }
 }
