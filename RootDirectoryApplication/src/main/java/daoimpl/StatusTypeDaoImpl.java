@@ -87,7 +87,7 @@ public class StatusTypeDaoImpl implements StatusTypeDao {
             con = DataSource.getConnection();
             
             pstmt = con.prepareStatement("SELECT "
-                    + "statusTypeID, "
+//                    + "statusTypeID, "
                     + "statusTypeName"
                     + "FROM Status_Type "
                     + "WHERE statusTypeID = ?");
@@ -99,7 +99,7 @@ public class StatusTypeDaoImpl implements StatusTypeDao {
             while (rs.next()){
                 statusType = new StatusType();
                 
-                statusType.setStatusTypeID(rs.getInt("statusTypeID")); //get id and set id in DTO
+                //statusType.setStatusTypeID(rs.getInt("statusTypeID")); //get id and set id in DTO
                 
                 statusType.setStatusTypeName(rs.getString("statusTypeName"));
             }

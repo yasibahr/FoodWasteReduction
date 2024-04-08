@@ -16,18 +16,18 @@
     </head>
     <body>
         <h1>Retailer</h1>
-        <h2>Food for sale</h2>
+        <h2>List of all food items</h2>
 
         <table border="1">
             <thead>
                 <tr>
-                    <th>FoodID</th>
+                    <th>ID</th>
                     <th>Food</th>
                     <th>Expiration Date</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                    <th>StatusTypeID</th>
-                    
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
         <tbody>
@@ -42,13 +42,21 @@
                         <td><%= item.getExpirationDate() %></td>
                         <td><%= item.getPrice() %></td>
                         <td><%= item.getQuantity() %></td>
-                        <td><%= item.getStatusTypeID() %></td>
+                        <td><%= item.getStatusType().getStatusTypeName() %></td> <!--Get statusTypeName from statusType in foodItemDao object-->
+                        <td>
+                            <!--Button to update status-->
+                            <form action="views/updateFoodItem.jsp" method="post">
+                                <!--use foodID to pass data to server but hidden from view-->
+                                <input type="hidden" name="foodID" value="<%= item.getFoodID() %>" />
+                                <!--updating-->
+                                <input type="submit" value="Update"/>
+                            </form>
+                        </td>
                     </tr>
             <%  }
             } else { %>
                 <tr>
                     <td colspan="6">No food items available for sale.</td>
-                    <td><%= allFoodItems %></td>
                 </tr>
             <% } %>
         </tbody>

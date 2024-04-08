@@ -22,6 +22,7 @@ public class FoodItem {
     private Integer userID;
     private Integer userTypeID;
     private Integer cityID;
+    private StatusType statusType;
 
     public Integer getFoodID() {
         return foodID;
@@ -101,5 +102,13 @@ public class FoodItem {
 
     public void setCityID(Integer cityID) {
         this.cityID = cityID;
+    }
+
+    public StatusType getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(StatusType statusType) {
+        this.statusType = statusType;
     }
 }

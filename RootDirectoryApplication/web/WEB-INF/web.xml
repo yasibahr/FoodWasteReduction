@@ -12,6 +12,10 @@
         <servlet-name>RetailerServlet</servlet-name>
         <servlet-class>controller.RetailerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateFoodItemServlet</servlet-name>
+        <servlet-class>controller.UpdateFoodItemServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -20,7 +24,10 @@
         <servlet-name>RetailerServlet</servlet-name>
         <url-pattern>/RetailerServlet</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>UpdateFoodItemServlet</servlet-name>
+        <url-pattern>/UpdateFoodItemServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

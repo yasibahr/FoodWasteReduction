@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import model.FoodItem;
+import model.StatusType;
 import model.Transactions;
 
 /**
@@ -34,8 +35,8 @@ public class FoodItemBusinessLogic {
     public void addFoodItem(FoodItem foodItem) throws SQLException, IOException{
         foodItemsDao.addFoodItem(foodItem);
     }
-    public void updateFoodItem(FoodItem foodItem) throws SQLException, IOException{
-        foodItemsDao.updateFoodItem(foodItem);
+    public void updateFoodItemByStatusTypeID(FoodItem foodItem, Integer statusTypeID) throws SQLException, IOException{
+        foodItemsDao.updateFoodItemByStatusTypeID(foodItem, statusTypeID);
     }
     
     public void deleteFoodItem(FoodItem foodItem) throws SQLException, IOException{

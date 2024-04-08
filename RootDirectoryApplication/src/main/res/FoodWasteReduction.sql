@@ -1,6 +1,6 @@
 /**
  *
- * @author Yasaman, Brian
+ * @author Yasaman, Brian, Fereshteh
  */
 DROP DATABASE IF EXISTS FoodWasteReduction;
 CREATE DATABASE FoodWasteReduction;
@@ -52,7 +52,7 @@ CREATE TABLE Users(
 ALTER TABLE Users AUTO_INCREMENT=400;
 
 CREATE TABLE Transactions(
-	transactionID INT NOT NULL AUTO_INCREMENT,
+    transactionID INT NOT NULL AUTO_INCREMENT,
     transactionDate DATETIME NOT NULL,
     userID INT,
     cityID INT,
@@ -65,7 +65,7 @@ CREATE TABLE Transactions(
 ALTER TABLE Transactions AUTO_INCREMENT=500;
 
 CREATE TABLE Food_Item(
-	foodID INT NOT NULL AUTO_INCREMENT,
+    foodID INT NOT NULL AUTO_INCREMENT,
     foodName VARCHAR(50) NOT NULL,
     expirationDate DATETIME NOT NULL,
     price FLOAT NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE Food_Item(
     userTypeID INT,
     cityID INT,
     CONSTRAINT PK_foodID PRIMARY KEY (foodID),
-	FOREIGN KEY (statusTypeID) REFERENCES Status_Type(statusTypeID),
+    FOREIGN KEY (statusTypeID) REFERENCES Status_Type(statusTypeID),
     FOREIGN KEY (transactionID) REFERENCES Transactions(transactionID),
     FOREIGN KEY (userID) REFERENCES Users(userID),
     FOREIGN KEY (cityID) REFERENCES City(cityID),
