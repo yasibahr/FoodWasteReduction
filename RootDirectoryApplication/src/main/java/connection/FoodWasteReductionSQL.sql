@@ -145,7 +145,6 @@ INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, 
 VALUES ('bananas', '2024-04-11 13:23:44', 5.00, 4, 300, null, 401, 101, 206); -- retailer1 is adding something
 COMMIT;
 
-    
 SELECT * FROM User_Type ;
 SELECT * FROM City;
 SELECT * FROM Users;
