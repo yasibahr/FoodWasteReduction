@@ -68,6 +68,9 @@ public class DataSource {
         info[1] = username; // "root"
         info[2] = password; // "algonquin"
 
+        System.out.println(username);
+        System.out.println(password);
+        
         return info;
     }
 }
