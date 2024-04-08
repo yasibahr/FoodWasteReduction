@@ -67,34 +67,34 @@ public class LoginServlet extends HttpServlet {
                 logger.debug("User is not null");
                 int userType = user.getUserTypeID(); //returns userTypeID
 
-                request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute("user", user); //set user
 
                 // Redirect based on user role or other attributes
                 switch (userType) {
                     case 101:
-                        response.sendRedirect("views/retailer.jsp");
+                        response.sendRedirect("RetailerServlet"); //redirect to servlet which will handle data prep
                         break;
                     case 102:
-                        response.sendRedirect("views/consumer.jsp");
+                        response.sendRedirect("ConsumerServlet");
                         break;
                     case 103:
-                        response.sendRedirect("views/charity.jsp");
+                        response.sendRedirect("CharityServlet");
                         break;
                     default:
-                        response.sendRedirect("index.html"); 
+                        response.sendRedirect("LoginServlet"); 
                         break;
                 }
             } else {                 
                 logger.warn("Authentication failed for email: " + email); //user not found, redirect to an error page
                 request.setAttribute("errorMessage", "Invalid Email or Password");
-                request.getRequestDispatcher("views/loginErrorPage.jsp").forward(request, response);
+                request.getRequestDispatcher("views/errorPage.jsp").forward(request, response);
             }
         } catch (Exception e) {
             logger.error("Exception processing POST request", e);
             e.printStackTrace();
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", "Login processing failed. Please try again: " + e.getMessage());
-            request.getRequestDispatcher("views/loginErrorPage.jsp").forward(request, response); //redirect to error page
+            request.getRequestDispatcher("views/errorPage.jsp").forward(request, response); //redirect to error page
         }
 
     }

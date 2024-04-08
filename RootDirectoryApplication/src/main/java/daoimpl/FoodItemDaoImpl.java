@@ -51,7 +51,7 @@ public class FoodItemDaoImpl implements FoodItemDao{
                     + "transactionID, "
                     + "userID, "
                     + "userTypeID "
-                    + "FROM Food_Items "
+                    + "FROM Food_Item "
                     + "ORDER BY foodID");
             rs = pstmt.executeQuery();
             

@@ -141,7 +141,14 @@ INSERT INTO Status_Type (statusTypeName) VALUES ('Discounted');
 INSERT INTO Status_Type (statusTypeName) VALUES ('Donated');
 COMMIT;
 
+INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
+VALUES ('bananas', '2024-04-11 13:23:44', 5.00, 4, 300, null, 401, 101, 206); -- retailer1 is adding something
+COMMIT;
+
+    
 SELECT * FROM User_Type ;
 SELECT * FROM City;
 SELECT * FROM Users;
 SELECT * FROM Status_Type;
+SELECT * FROM Food_Item;
+SELECT * FROM Transactions;

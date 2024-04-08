@@ -9,11 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Error</title>
+        <title>Error Page</title>
     </head>
     <body>
-        <h1>error page jsp caught in if else</h1>
-        <h1>hello7</h1>
-
+        <h1>error page</h1>
     </body>
 </html>
