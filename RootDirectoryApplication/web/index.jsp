@@ -31,7 +31,7 @@ It directs user requests to specific Servlets, based on the action.-->
         
         <!--Redirect to Register page.
         Clicking register doesn't send sensitive data so get is preferred.-->
-        <form action="RegistrationServlet" method="get">
+        <form action="views/usersRegistration.jsp" method="get">
             <input type="submit" value="Register" />
         </form>
         
