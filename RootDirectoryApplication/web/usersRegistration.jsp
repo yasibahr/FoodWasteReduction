@@ -5,6 +5,9 @@
 --%>
 
 <%@page import="model.Users"%>
+<%@page import="model.City" %>
+<%@page import="model.UserType" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,7 +39,7 @@
             <label for="userType">User Type:</label>
             <select name="userType" id="userType">
                 <option value="admin" selected>Admin</option>
-                <option value="retailor">Retailor</option>
+                <option value="retailor">Retailer</option>
                 <option value="consumer">Consumer</option>
                 <option value="charity">Charity</option>
             </select>

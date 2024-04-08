@@ -109,14 +109,23 @@ public class UsersRegistrationServlet extends HttpServlet {
                 break;
         }
 
-        UsersDaoImpl usersDaoImpl = new UsersDaoImpl();
+//        try (PrintWriter out = response.getWriter()) {
+//            out.println("<div>"+user.getUserName()+"</div>");
+//            out.println("<div>"+user.getPassword()+"</div>");
+//            out.println("<div>"+user.getCityID()+"</div>");
+//            out.println("<div>"+user.getUserTypeID()+"</div>");
+//        }
+        
+        UsersDaoImpl userDaoImpl = new UsersDaoImpl();
         try {
-            usersDaoImpl.addUser(user);
-        } catch (SQLException | IOException e) {
+            userDaoImpl.addUser(user);
+            // redirect to a success page
+            response.sendRedirect("registrationSuccess.jsp");
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            // redirect to an error page
             response.sendRedirect("registrationError.jsp");
         }
-
-        response.sendRedirect("registrationSuccess.jsp");
     }
     
     /**
