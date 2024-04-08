@@ -20,7 +20,7 @@
         
         <h2>User Registration Form</h2>
     
-        <form action="UsersRegistrationServlet" method="post">
+        <form action="UserRegistrationServlet" method="post">
             <label for="userName">Username:</label>
             <input type="text" id="userName" name="userName" required><br><br>
 

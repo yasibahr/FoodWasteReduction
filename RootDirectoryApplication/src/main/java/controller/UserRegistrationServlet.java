@@ -1,23 +1,26 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package controller;
 
+import daoimpl.UsersDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import model.Users;
-import daoimpl.UsersDaoImpl;
-import java.sql.SQLException;
 
 /**
  *
- * @author Fereshteh
+ * @author froha
  */
-@WebServlet(name = "UsersRegistrationServlet", urlPatterns = {"/UsersRegistrationServlet"})
-public class UsersRegistrationServlet extends HttpServlet {
+@WebServlet(name = "UserRegistrationServlet", urlPatterns = {"/UserRegistrationServlet"})
+public class UserRegistrationServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +39,10 @@ public class UsersRegistrationServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UsersRegistrationServlet</title>");            
+            out.println("<title>Servlet UserRegistrationServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UsersRegistrationServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UserRegistrationServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,27 +60,8 @@ public class UsersRegistrationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        processRequest(request, response);
-//    }
-    
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        //processRequest(request, response);
+        
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
@@ -108,26 +92,31 @@ public class UsersRegistrationServlet extends HttpServlet {
             default:
                 break;
         }
-
-//        try (PrintWriter out = response.getWriter()) {
-//            out.println("<div>"+user.getUserName()+"</div>");
-//            out.println("<div>"+user.getPassword()+"</div>");
-//            out.println("<div>"+user.getCityID()+"</div>");
-//            out.println("<div>"+user.getUserTypeID()+"</div>");
-//        }
-        
+                
         UsersDaoImpl userDaoImpl = new UsersDaoImpl();
         try {
             userDaoImpl.addUser(user);
-            // redirect to a success page
             response.sendRedirect("registrationSuccess.jsp");
         } catch (SQLException e) {
-            // e.printStackTrace();
-            // redirect to an error page
             response.sendRedirect("registrationError.jsp");
         }
+        
     }
-    
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
     /**
      * Returns a short description of the servlet.
      *
