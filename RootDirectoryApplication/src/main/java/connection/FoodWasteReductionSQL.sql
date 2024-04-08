@@ -134,9 +134,9 @@ VALUES ('charity3', 'charity3@example.com', '9992223372', '12345678', 103, 209);
 COMMIT;
 
 INSERT INTO Status_Type (statusTypeName) VALUES ('Available');
-INSERT INTO Status_Type (statusTypeName) VALUES ('Sold');
+INSERT INTO Status_Type (statusTypeName) VALUES ('Available');
 INSERT INTO Status_Type (statusTypeName) VALUES ('Claimed');
-INSERT INTO Status_Type (statusTypeName) VALUES ('Deleted');
+INSERT INTO Status_Type (statusTypeName) VALUES ('For Donation');
 INSERT INTO Status_Type (statusTypeName) VALUES ('Discounted');
 INSERT INTO Status_Type (statusTypeName) VALUES ('Donated');
 COMMIT;

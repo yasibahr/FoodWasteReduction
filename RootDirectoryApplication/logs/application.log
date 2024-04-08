@@ -65,3 +65,6 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'foodwastereduction.food_item
 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972) ~[mysql-connector-j-8.0.33.jar:8.0.33]
 	at daoimpl.FoodItemDaoImpl.getAllFoodItems(FoodItemDaoImpl.java:56) ~[classes/:?]
 	... 25 more
+2024-04-08 01:04:49 [http-nio-8080-exec-77] INFO  controller.LoginServlet - Received POST request from 0:0:0:0:0:0:0:1
+2024-04-08 01:04:49 [http-nio-8080-exec-91] INFO  controller.RetailerServlet - Received GET request from 0:0:0:0:0:0:0:1
+2024-04-08 01:04:49 [http-nio-8080-exec-91] INFO  controller.RetailerServlet - allFoodItems list is not empty
