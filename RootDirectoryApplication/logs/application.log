@@ -68,3 +68,45 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'foodwastereduction.food_item
 2024-04-08 01:04:49 [http-nio-8080-exec-77] INFO  controller.LoginServlet - Received POST request from 0:0:0:0:0:0:0:1
 2024-04-08 01:04:49 [http-nio-8080-exec-91] INFO  controller.RetailerServlet - Received GET request from 0:0:0:0:0:0:0:1
 2024-04-08 01:04:49 [http-nio-8080-exec-91] INFO  controller.RetailerServlet - allFoodItems list is not empty
+2024-04-08 01:21:30 [http-nio-8080-exec-103] INFO  controller.LoginServlet - Received POST request from 0:0:0:0:0:0:0:1
+2024-04-08 01:21:31 [http-nio-8080-exec-112] INFO  controller.RetailerServlet - Received GET request from 0:0:0:0:0:0:0:1
+2024-04-08 01:21:31 [http-nio-8080-exec-112] INFO  controller.RetailerServlet - allFoodItems list is not empty
+2024-04-08 17:29:55 [http-nio-8080-exec-162] INFO  controller.LoginServlet - Received POST request from 0:0:0:0:0:0:0:1
+2024-04-08 17:29:55 [http-nio-8080-exec-162] ERROR controller.LoginServlet - Exception processing POST request
+java.sql.SQLException: Cannot get user by email due to issues with SQL.
+	at daoimpl.UsersDaoImpl.getUserByEmail(UsersDaoImpl.java:177) ~[classes/:?]
+	at controller.LoginServlet.doPost(LoginServlet.java:62) ~[classes/:?]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555) ~[servlet-api.jar:4.0.FR]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[servlet-api.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[catalina.jar:9.0.86]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[catalina.jar:9.0.86]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-websocket.jar:9.0.86]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[catalina.jar:9.0.86]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[catalina.jar:9.0.86]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168) ~[catalina.jar:9.0.86]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[catalina.jar:9.0.86]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[catalina.jar:9.0.86]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[catalina.jar:9.0.86]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[catalina.jar:9.0.86]
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670) ~[catalina.jar:9.0.86]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[catalina.jar:9.0.86]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346) ~[catalina.jar:9.0.86]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-coyote.jar:9.0.86]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-coyote.jar:9.0.86]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928) ~[tomcat-coyote.jar:9.0.86]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794) ~[tomcat-coyote.jar:9.0.86]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-coyote.jar:9.0.86]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-util.jar:9.0.86]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-util.jar:9.0.86]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-util.jar:9.0.86]
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: java.sql.SQLException: Could not create connection
+	at connection.DataSource.getConnection(DataSource.java:40) ~[classes/:?]
+	at daoimpl.UsersDaoImpl.getUserByEmail(UsersDaoImpl.java:144) ~[classes/:?]
+	... 25 more
+2024-04-08 17:29:58 [http-nio-8080-exec-161] INFO  controller.LoginServlet - Received POST request from 0:0:0:0:0:0:0:1
+2024-04-08 17:30:00 [http-nio-8080-exec-156] INFO  controller.RetailerServlet - Received GET request from 0:0:0:0:0:0:0:1
+2024-04-08 17:30:00 [http-nio-8080-exec-156] INFO  controller.RetailerServlet - allFoodItems list is not empty
+2024-04-08 17:30:06 [http-nio-8080-exec-164] INFO  controller.LoginServlet - Received POST request from 0:0:0:0:0:0:0:1
+2024-04-08 17:30:06 [http-nio-8080-exec-165] INFO  controller.RetailerServlet - Received GET request from 0:0:0:0:0:0:0:1
+2024-04-08 17:30:06 [http-nio-8080-exec-165] INFO  controller.RetailerServlet - allFoodItems list is not empty

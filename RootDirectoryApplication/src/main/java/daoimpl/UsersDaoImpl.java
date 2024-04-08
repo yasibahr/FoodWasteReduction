@@ -285,7 +285,6 @@ public class UsersDaoImpl implements UsersDao {
         } 
     }
     
-    //*************************************
     public Users validateUser(String email, String password) throws SQLException, IOException {
         Users user = null;
         Connection con = null;
@@ -303,15 +302,15 @@ public class UsersDaoImpl implements UsersDao {
                + "WHERE u.email = ? AND u.password = ?";
             pstmt = con.prepareStatement(sql);
 
-            // Logging SQL and parameters
+            //logging SQL and parameters
             System.out.println("Executing SQL: " + sql);
-            System.out.println("With parameters: Email = " + email + ", Password = [protected]"); // It's a good practice not to log passwords
+            System.out.println("With parameters: Email = " + email + ", Password = [protected]"); 
 
 
             pstmt.setString(1, email);
             pstmt.setString(2, password);
 
-            rs = pstmt.executeQuery(); // Execute the query and assign the result to rs
+            rs = pstmt.executeQuery(); //execute query and assign result to rs
 
             if (rs.next()) {
                 user = new Users();
@@ -319,7 +318,7 @@ public class UsersDaoImpl implements UsersDao {
                 user.setUserName(rs.getString("userName"));
                 user.setEmail(rs.getString("email"));
                 user.setPhone(rs.getString("phone"));
-                user.setPassword(rs.getString("password")); // Note: Storing password in object is usually not advised
+                user.setPassword(rs.getString("password")); 
                 user.setUserTypeID(rs.getInt("userTypeID"));
 
                 UserType userType = new UserType();
@@ -328,8 +327,7 @@ public class UsersDaoImpl implements UsersDao {
                 user.setUserType(userType);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw e; // It's usually better to throw a custom exception or handle it appropriately
+            throw new SQLException("Cannot validate user because of SQL issue", e);
         } 
 //        finally {
 //            // Ensure resources are closed to prevent leaks

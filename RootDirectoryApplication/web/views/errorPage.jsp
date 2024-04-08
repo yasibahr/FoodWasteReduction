@@ -12,6 +12,6 @@
         <title>Error Page</title>
     </head>
     <body>
-        <h1>error page</h1>
+        <h1>Error!</h1>
     </body>
 </html>
