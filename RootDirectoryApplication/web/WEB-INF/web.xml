@@ -13,8 +13,16 @@
         <servlet-class>controller.RetailerServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ConsumerServlet</servlet-name>
+        <servlet-class>controller.ConsumerServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UpdateFoodItemServlet</servlet-name>
         <servlet-class>controller.UpdateFoodItemServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddFoodItemServlet</servlet-name>
+        <servlet-class>controller.AddFoodItemServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -27,6 +35,14 @@
     <servlet-mapping>
         <servlet-name>UpdateFoodItemServlet</servlet-name>
         <url-pattern>/UpdateFoodItemServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsumerServlet</servlet-name>
+        <url-pattern>/ConsumerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFoodItemServlet</servlet-name>
+        <url-pattern>/AddFoodItemServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

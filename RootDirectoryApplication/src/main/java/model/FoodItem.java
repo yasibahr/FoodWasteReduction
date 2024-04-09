@@ -23,6 +23,10 @@ public class FoodItem {
     private Integer userTypeID;
     private Integer cityID;
     private StatusType statusType;
+    private Transactions transactions;
+    private Users user;
+    private UserType userType;
+    private City city;
 
     public Integer getFoodID() {
         return foodID;
@@ -111,4 +115,36 @@ public class FoodItem {
     public void setStatusType(StatusType statusType) {
         this.statusType = statusType;
     }
+    
+    public Transactions getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Transactions transactions) {
+        this.transactions = transactions;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }    
 }

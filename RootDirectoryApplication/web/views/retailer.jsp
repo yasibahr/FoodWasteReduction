@@ -1,7 +1,7 @@
 <%-- 
     Document   : retailer
     Created on : Apr 6, 2024, 3:05:19 p.m.
-    Author     : Yasi
+    Author     : Yasaman
 --%>
 
 <%@page import="model.FoodItem"%>
@@ -16,6 +16,12 @@
     </head>
     <body>
         <h1>Retailer</h1>
+        
+        <!--Log out button-->
+        <form action="index.jsp" method="get">
+            <input type="submit" value="Log out" />
+        </form>
+        
         <h2>List of all food items</h2>
 
         <table border="1">
@@ -61,5 +67,12 @@
             <% } %>
         </tbody>
         </table>
+        <!--Add foodItem button-->
+        <form action="views/addFoodItem.jsp" method="get">
+            <input type="hidden" name="userID" value="<%= request.getParameter("userID") %>" /> <!--pass userID in the form too so I can use it in servlet-->
+            <input type="hidden" name="userTypeID" value="<%= request.getParameter("userTypeID") %>" /> <!--pass userTypeID in the form too so I can use it in servlet-->
+            <input type="hidden" name="cityID" value="<%= request.getParameter("cityID") %>" /> <!--pass cityID in the form too so I can use it in servlet-->
+            <input type="submit" value="Add Food Item" />
+        </form>        
     </body>
 </html>

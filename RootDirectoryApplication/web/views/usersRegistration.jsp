@@ -20,7 +20,7 @@
         
         <h2>User Registration Form</h2>
     
-        <form action="UserRegistrationServlet" method="post">
+        <form action="../UserRegistrationServlet" method="post">
             <label for="userName">Username:</label>
             <input type="text" id="userName" name="userName" required><br><br>
 
@@ -33,8 +33,8 @@
             <label for="phone">Phone:</label>
             <input type="text" id="phone" name="phone" required><br><br>
 
-            <label for="cityId">City ID:</label>
-            <input type="text" id="cityId" name="cityId" required><br><br>
+            <label for="cityID">City ID:</label>
+            <input type="text" id="cityID" name="cityID" required><br><br>
 
             <label for="userType">User Type:</label>
             <select name="userType" id="userType">

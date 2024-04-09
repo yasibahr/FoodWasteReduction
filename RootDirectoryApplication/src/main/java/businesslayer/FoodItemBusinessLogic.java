@@ -35,8 +35,8 @@ public class FoodItemBusinessLogic {
     public void addFoodItem(FoodItem foodItem) throws SQLException, IOException{
         foodItemsDao.addFoodItem(foodItem);
     }
-    public void updateFoodItemByStatusTypeID(FoodItem foodItem, Integer statusTypeID) throws SQLException, IOException{
-        foodItemsDao.updateFoodItemByStatusTypeID(foodItem, statusTypeID);
+    public void updateFoodItemByStatusTypeIDAndPrice(FoodItem foodItem, Integer statusTypeID, Double price) throws SQLException, IOException{
+        foodItemsDao.updateFoodItemByStatusTypeIDAndPrice(foodItem, statusTypeID, price);
     }
     
     public void deleteFoodItem(FoodItem foodItem) throws SQLException, IOException{

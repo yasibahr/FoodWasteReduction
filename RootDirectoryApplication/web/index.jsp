@@ -24,10 +24,8 @@ It directs user requests to specific Servlets, based on the action.-->
                 <input type="text" name="email" id="email"><br>
             <label for="password">Password:</label> 
                 <input type="password" name="password" id="password"><br>
-            <input type="submit" value="login">
+            <input type="submit" value="Login">
         </form>
-        
-        
         
         <!--Redirect to Register page.
         Clicking register doesn't send sensitive data so get is preferred.-->

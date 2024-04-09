@@ -4,7 +4,7 @@
  */
 package controller;
 
-import static com.mysql.cj.conf.PropertyKey.logger;
+import businesslayerUsersRegistration.Validator;
 import dao.FoodItemDao;
 import daoimpl.FoodItemDaoImpl;
 import daoimpl.UsersDaoImpl;
@@ -19,11 +19,12 @@ import org.apache.logging.log4j.LogManager;
 
 /**
  *
- * @author Yasi
+ * @author Yasaman
  */
 public class UpdateFoodItemServlet extends HttpServlet {
     private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(LoginServlet.class);
     private FoodItemDao foodItemDao;
+    private FoodItem foodItem;
     
     /**
      * 
@@ -33,6 +34,7 @@ public class UpdateFoodItemServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         this.foodItemDao = new FoodItemDaoImpl(); //initialize DAO per servlet lifecycle
+        this.foodItem = new FoodItem();
     }    
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -46,20 +48,38 @@ public class UpdateFoodItemServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Received POST request from " + request.getRemoteAddr());
-    
+
+        Validator validator = new Validator();
+
+        int priceInt = 0;
+        int quantity = 0;
+        
         //get as strings but need to make them ints
         int foodID = Integer.parseInt(request.getParameter("foodID")); 
         int statusTypeID = Integer.parseInt(request.getParameter("statusTypeID"));
-    
+        String priceString = request.getParameter("price");
+        
+//        String validatePrice = validator.validatePrice(priceString);
+        //PRICE
+        String priceStr = request.getParameter("price");
+        Double priceDouble = validator.validateAndParsePrice(priceStr);
+
+        if (priceDouble == null) {
+            logger.error("Price is invalid or not provided.");
+            priceDouble = 0.0;
+        }       
+        
         try{
-            FoodItem foodItem = foodItemDao.getFoodItemByFoodItemID(foodID);
+            foodItem = foodItemDao.getFoodItemByFoodItemID(foodID);
             
             if(foodItem != null){
                 //set new statusTypeID
                 foodItem.setStatusTypeID(statusTypeID);
+                foodItem.setPrice(priceDouble.floatValue()); //set price
                 
+    
                 //update food item in DB
-                foodItemDao.updateFoodItemByStatusTypeID(foodItem, statusTypeID);
+                foodItemDao.updateFoodItemByStatusTypeIDAndPrice(foodItem, statusTypeID, priceDouble);
                 
                 response.sendRedirect("RetailerServlet"); //send back to retailer home page with updated statusType
             } else {
@@ -67,7 +87,7 @@ public class UpdateFoodItemServlet extends HttpServlet {
                 response.sendRedirect("views/errorPage.jsp"); //send to error page
             }
         } catch (Exception e) {
-            logger.error("Cannot update food item by statusTypeID", e);
+            logger.error("Cannot update food item by statusTypeID or price", e);
             response.sendRedirect("views/errorPage.jsp"); //send to error page
         }
         

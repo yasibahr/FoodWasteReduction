@@ -19,6 +19,7 @@ public class Users {
     private Integer userTypeID;
     private Integer cityID;
     private UserType userType;
+    private City city;
 
     public Integer getUserID() {
         return userID;
@@ -82,5 +83,13 @@ public class Users {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+    
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }

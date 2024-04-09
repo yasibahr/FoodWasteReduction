@@ -20,6 +20,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.City;
 import model.UserType;
 import model.Users;
 import org.apache.logging.log4j.LogManager;
@@ -53,24 +55,28 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Received POST request from " + request.getRemoteAddr());
-
+        
         String email = request.getParameter("email"); //get email from request
         String password = request.getParameter("password"); //get password request
             
         //try to authenticate user
         try {
-            Users user = usersDao.getUserByEmail(email); //use email to get user
-            logger.debug("Processing request for email: " + email);
-
+            Users user = usersDao.validateUser(email, password); //if user combo exists, returns the user
+            logger.info("Processing request for email: " + email);
             
             if (user != null) {
-                logger.debug("User is not null");
-                int userType = user.getUserTypeID(); //returns userTypeID
+                logger.info("User is not null");
+                
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user); //store entire user object
+                session.setAttribute("userID", user.getUserID());
+                session.setAttribute("userTypeID", user.getUserTypeID()); 
+                session.setAttribute("cityID", user.getCityID()); 
 
-                request.getSession().setAttribute("user", user); //set user
-
+                int userTypeID = user.getUserType().getUserTypeID(); 
+            
                 // Redirect based on user role or other attributes
-                switch (userType) {
+                switch (userTypeID) {
                     case 101:
                         response.sendRedirect("RetailerServlet"); //redirect to servlet which will handle data prep
                         break;
@@ -96,7 +102,6 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Login processing failed. Please try again: " + e.getMessage());
             request.getRequestDispatcher("views/errorPage.jsp").forward(request, response); //redirect to error page
         }
-
     }
 }
 

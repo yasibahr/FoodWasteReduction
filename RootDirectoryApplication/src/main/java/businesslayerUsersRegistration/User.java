@@ -1,4 +1,4 @@
-package businesslayer.usersRegistration;
+package businesslayerUsersRegistration;
 
 /**
  *

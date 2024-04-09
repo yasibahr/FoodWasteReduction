@@ -5,6 +5,7 @@
 package controller;
 
 import businesslayer.FoodItemBusinessLogic;
+import static com.mysql.cj.conf.PropertyKey.logger;
 import dao.FoodItemDao;
 import daoimpl.FoodItemDaoImpl;
 import daoimpl.UsersDaoImpl;
@@ -27,10 +28,10 @@ import org.apache.logging.log4j.LogManager;
 
 /**
  *
- * @author Yasaman
+ * @author Brian
  */
-public class RetailerServlet extends HttpServlet {
-    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(RetailerServlet.class);
+public class ConsumerServlet extends HttpServlet {
+    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(ConsumerServlet.class);
     private FoodItemDao foodItemDao;
     
     /**
@@ -55,21 +56,19 @@ public class RetailerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Received GET request from " + request.getRemoteAddr());
-        
-        HttpSession session = request.getSession(false); // false = don't create a new session
+        HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            logger.error("session is null in retailer servlet.");
+            logger.error("session in consumer is null");
             response.sendRedirect("errorPage.jsp"); 
             return;
         }        
-        
         List<FoodItem> allFoodItems = new ArrayList<FoodItem>();
         
         try {
             allFoodItems = foodItemDao.getAllFoodItems();            
         
             if(allFoodItems==null || allFoodItems.isEmpty()){
-                logger.info("allFoodItems list is empty");
+                logger.info("forSaleFoodItems list is empty");
                 
                 //set attribute to indicate no items are available. can use this to display message in jsp
                 request.setAttribute("message","no food items available for sale. allFoodItems list is empty");
@@ -82,7 +81,7 @@ public class RetailerServlet extends HttpServlet {
                 logger.info("allFoodItems list is not empty");
 
                 //get dispatcher from req then invoke forward method from dispatcher. then jsp page will handle req
-                RequestDispatcher dispatcher = request.getRequestDispatcher("views/retailer.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("views/consumer.jsp");
                 dispatcher.forward(request,response);
             }
         } catch (SQLException ex) {
