@@ -143,6 +143,12 @@ COMMIT;
 
 INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
 VALUES ('bananas', '2024-04-11 13:23:44', 5.00, 4, 300, null, 401, 101, 206); -- retailer1 is adding something
+INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
+VALUES ('bread', '2024-05-11 13:23:44', 10.00, 1, 300, null, 401, 101, 206); -- retailer1 is adding something
+INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
+VALUES ('fish', '2024-04-20 13:23:44', 5.00, 4, 301, null, 401, 101, 206); -- retailer1 is adding something
+INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
+VALUES ('apples', '2024-06-20 13:23:44', 5.00, 4, 302, null, 401, 101, 206); -- retailer1 is adding something
 COMMIT;
 
     
