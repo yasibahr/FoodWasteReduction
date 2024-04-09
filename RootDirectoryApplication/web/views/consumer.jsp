@@ -48,7 +48,7 @@
                             <form action ="../UpdateFoodItemServlet" method="post">
                                 <input type="submit" value="Claim">
                                 <input type="hidden" name="foodID" value="<%= request.getParameter("foodID") %>" /> <!--pass foodID in the form too so I can use it in servlet-->
-                                <input type="hidden" name="statusTypeID" value="301" /> <!<!-- 301 is sold, consumers can only buy items. why is this in a purple box -->
+                                <input type="hidden" name="statusTypeID" value="301" /> <!<!-- 301 is sold, consumers can only buy items-->
                             </form> 
                         </td>
                     </tr>
