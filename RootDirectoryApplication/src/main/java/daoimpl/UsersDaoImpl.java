@@ -5,6 +5,7 @@
 package daoimpl;
 
 import connection.DataSource;
+import controller.LoginServlet;
 import dao.UsersDao;
 import java.io.IOException;
 import java.sql.Connection;
@@ -15,12 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 import model.UserType;
 import model.Users;
+import org.apache.logging.log4j.LogManager;
 
 /**
  *
  * @author Brian, Yasaman
  */
 public class UsersDaoImpl implements UsersDao {
+    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(LoginServlet.class);
     ArrayList<Users> allUsers = null;    
 
     /**
@@ -290,28 +293,31 @@ public class UsersDaoImpl implements UsersDao {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        
-        System.out.println("hello8");
-        
+
         try {
-            System.out.println("hello9");
             con = DataSource.getConnection();
-            String sql = "SELECT u.*, ut.userType "
-               + "FROM Users u "
-               + "JOIN User_Type ut ON u.userTypeID = ut.userTypeID "
-               + "WHERE u.email = ? AND u.password = ?";
+            String sql = "SELECT "
+                    + "Users.userID, "
+                    + "Users.userName, "
+                    + "Users.email, "
+                    + "Users.phone, "
+                    + "Users.password, "
+                    + "Users.userTypeID, "
+                    + "User_Type.userType "
+                    + "FROM Users "
+                    + "JOIN User_Type ON Users.userTypeID = User_Type.userTypeID "
+                    + "WHERE Users.email = ? AND Users.password = ?";
             pstmt = con.prepareStatement(sql);
 
-            //logging SQL and parameters
             System.out.println("Executing SQL: " + sql);
             System.out.println("With parameters: Email = " + email + ", Password = [protected]"); 
-
 
             pstmt.setString(1, email);
             pstmt.setString(2, password);
 
-            rs = pstmt.executeQuery(); //execute query and assign result to rs
+            rs = pstmt.executeQuery(); //send sql query to db to be executed
 
+            //check if the db returned anything. rs.next() returns true if email and password found
             if (rs.next()) {
                 user = new Users();
                 user.setUserID(rs.getInt("userID"));
@@ -326,20 +332,21 @@ public class UsersDaoImpl implements UsersDao {
                 userType.setUserType(rs.getString("userType"));
                 user.setUserType(userType);
             }
+            //else means email and password not found in db 
         } catch (SQLException e) {
-            throw new SQLException("Cannot validate user because of SQL issue", e);
+            throw new SQLException("Cannot validate user. Issues with the sql. Email and password combination may not exist in the database.", e);
         } 
-//        finally {
-//            // Ensure resources are closed to prevent leaks
-//            try {
-//                if (rs != null) rs.close();
-//                if (pstmt != null) pstmt.close();
-//                if (con != null) con.close();
-//            } catch (SQLException ex) {
-//                ex.printStackTrace();
-//                // Consider more sophisticated error handling
-//            }
-//        }
-        return user;
+    //    finally {
+    //        try {
+    //            if (rs != null) rs.close();
+    //            if (pstmt != null) pstmt.close();
+    //            if (con != null) con.close();
+    //        } catch (SQLException ex) {
+    //            ex.printStackTrace();
+    //            logger.error("trouble closing resources");
+    //        }
+    //    }
+        return user; //if email and password not found, user=null
     }
+
 }

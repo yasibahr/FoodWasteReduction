@@ -1,6 +1,12 @@
 package businesslayerUsersRegistration;
 
 import controller.UserRegistrationServlet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
  * @author Fereshteh
  */
 public class Validator {
-    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(UserRegistrationServlet.class);
+    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(Validator.class);
 
     private String validatorException;
     
@@ -101,7 +107,7 @@ public class Validator {
     * @param cityId The city ID to validate.
     * @return true if valid, false otherwise.
     */
-    //*******************200 to 211 **************
+    //200 to 211
     public boolean validateCityID(int cityID) {
         // Check if cityId is a three-digit number
         if(cityID < 100 || cityID > 999){
@@ -120,7 +126,7 @@ public class Validator {
     * @param userTypeID The city ID to validate.
     * @return true if valid, false otherwise.
     */
-    //********************100 to 103************
+    //100 to 103
     public boolean validateUserTypeID(int userTypeID) {
         // Check if cityId is a three-digit number
         if(userTypeID < 100 || userTypeID > 999){
@@ -134,5 +140,53 @@ public class Validator {
         }
     }
     
+    /**
+     * 
+     * @param expirationDate
+     * @return 
+     */
+    public boolean validateExpirationDate(String expirationDate){
+        //check if the format is YYYY-MM-DD
+        String validDate = "\\d{4}-\\d{2}-\\d{2}";
+        
+        //if its incorrect format
+        if (!expirationDate.matches(validDate)) {
+            return false;
+        }
+
+        //if its correct format, check if its a date that makes sense
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate date = LocalDate.parse(expirationDate, formatter);
+
+            //year must be 2024 or after
+            if (date.getYear() <= 2024) {
+                return false;
+            }
+            return true; //the date meets all criteria
+        } catch (DateTimeParseException e) {
+            logger.error("Date format is valid but not correct date");
+            return false; //date is not valid
+        }
+    }
+    
+    public Double validateAndParsePrice(String price) {
+        try {
+            return Double.parseDouble(price); //try to parse the price
+        } catch (NumberFormatException e) {
+            logger.warn("Price is not a valid number: " + price, e);
+            return null; 
+        }
+    }
+        
+    public Date parseStringToDate(String dateString) {
+        SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+        try {
+            return formatter.parse(dateString);
+        } catch (ParseException e) {
+            logger.error("Error parsing the date: " + dateString, e);
+            return null;
+        }
+    }
 }
 
