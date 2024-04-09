@@ -1,7 +1,7 @@
 <%-- 
     Document   : retailer
     Created on : Apr 6, 2024, 3:05:19 p.m.
-    Author     : Yasi, Brian
+    Author     : Brian
 --%>
 
 <%@page import="model.FoodItem"%>

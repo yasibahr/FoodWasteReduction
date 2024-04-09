@@ -13,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
 
 /**
  * Validator class for various input validations
- * @author Fereshteh
+ * @author Fereshteh, Yasaman
  */
 public class Validator {
     private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(Validator.class);
@@ -141,9 +141,9 @@ public class Validator {
     }
     
     /**
-     * 
+     * Make sure expiration date is right format and is valid date
      * @param expirationDate
-     * @return 
+     * @return true or false
      */
     public boolean validateExpirationDate(String expirationDate){
         //check if the format is YYYY-MM-DD
@@ -170,6 +170,11 @@ public class Validator {
         }
     }
     
+    /**
+     * Turn a price of type string into a type double and validate it
+     * @param price
+     * @return a price of type Double
+     */
     public Double validateAndParsePrice(String price) {
         try {
             return Double.parseDouble(price); //try to parse the price
@@ -178,7 +183,12 @@ public class Validator {
             return null; 
         }
     }
-        
+       
+    /**
+     * Turn a date of type string to type Date
+     * @param dateString
+     * @return a date of type Date
+     */
     public Date parseStringToDate(String dateString) {
         SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
         try {

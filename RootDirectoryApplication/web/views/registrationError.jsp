@@ -1,7 +1,7 @@
 <%-- 
     Document   : registrationError
     Created on : Apr 8, 2024, 12:19:35 AM
-    Author     : froha
+    Author     : Fereshteh
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
