@@ -16,6 +16,12 @@
     </head>
     <body>
         <h1>Retailer</h1>
+        
+        <!--Log out button-->
+        <form action="index.jsp" method="get">
+            <input type="submit" value="Log out" />
+        </form>
+        
         <h2>List of all food items</h2>
 
         <table border="1">

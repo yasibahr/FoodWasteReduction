@@ -59,9 +59,9 @@ public class LoginServlet extends HttpServlet {
             
         //try to authenticate user
         try {
-            Users user = usersDao.getUserByEmail(email); //use email to get user
+            Users user = usersDao.validateUser(email, password); //if user combo exists, returns the user
+            //user = usersDao.getUserByEmail(email); //use email to get user
             logger.info("Processing request for email: " + email);
-
             
             if (user != null) {
                 logger.info("User is not null");
