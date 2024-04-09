@@ -23,38 +23,74 @@ public class Transactions {
         return transactionID;
     }
 
+    /**
+     * set transactionid
+     * @param transactionID 
+     */
     public void setTransactionID(Integer transactionID) {
         this.transactionID = transactionID;
     }
 
+    /**
+     * get transaction date
+     * @return date
+     */
     public LocalDateTime getTransactionDate() {
         return transactionDate;
     }
 
+    /**
+     * set transaction date
+     * @param transactionDate 
+     */
     public void setTransactionDate(LocalDateTime transactionDate) {
         this.transactionDate = transactionDate;
     }
     
+    /**
+     * get user
+     * @return user
+     */
     public Users getUser() {
         return user;
     }
 
+    /**
+     * set user
+     * @param user 
+     */
     public void setUser(Users user) {
         this.user = user;
     }
 
+    /**
+     * get city
+     * @return city
+     */
     public City getCity() {
         return city;
     }
 
+    /**
+     * set city
+     * @param city 
+     */
     public void setCity(City city) {
         this.city = city;
     }
 
+    /**
+     * get user type id
+     * @return int
+     */
     public Integer getUserTypeID() {
         return userTypeID;
     }
 
+    /**
+     * set user type id
+     * @param userTypeID 
+     */
     public void setUserTypeID(Integer userTypeID) {
         this.userTypeID = userTypeID;
     }

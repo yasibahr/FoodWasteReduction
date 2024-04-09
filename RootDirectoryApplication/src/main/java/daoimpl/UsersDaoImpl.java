@@ -19,7 +19,7 @@ import model.Users;
 import org.apache.logging.log4j.LogManager;
 
 /**
- *
+ * Implementation of users dao
  * @author Brian, Yasaman
  */
 public class UsersDaoImpl implements UsersDao {
@@ -32,8 +32,8 @@ public class UsersDaoImpl implements UsersDao {
     public UsersDaoImpl(){}    
     
     /**
-     * 
-     * @return
+     * get all users as list
+     * @return list of users
      * @throws SQLException
      * @throws IOException 
      */

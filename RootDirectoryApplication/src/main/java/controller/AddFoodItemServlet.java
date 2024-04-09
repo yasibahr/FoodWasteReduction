@@ -29,7 +29,7 @@ import model.Users;
 import org.apache.logging.log4j.LogManager;
 
 /**
- *
+ * Servlet for adding food items as retailer
  * @author Yasaman
  */
 public class AddFoodItemServlet extends HttpServlet {
@@ -38,7 +38,7 @@ public class AddFoodItemServlet extends HttpServlet {
     private FoodItem foodItem;
     
     /**
-     * 
+     * Allows for one-time initialization before the servlet starts handling requests.
      * @throws ServletException 
      */
     @Override
@@ -96,18 +96,6 @@ public class AddFoodItemServlet extends HttpServlet {
             logger.error("Price is invalid or not provided.");
             priceDouble = 0.0;
         } 
-
-        
-//        String price = request.getParameter("price");
-//        String validatePrice = validator.validatePrice(price);
-//        
-//        //price is ready to insert to database 
-//        if (validatePrice.equalsIgnoreCase("double")){
-//                priceDouble = Double.parseDouble(price);
-//        } else {
-//            logger.error("price is not an integer or a double number");
-//        }
-        
         
         //QUANTITY
         String quantityStr = request.getParameter("quantity");

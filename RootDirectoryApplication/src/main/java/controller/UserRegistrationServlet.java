@@ -21,7 +21,7 @@ import org.apache.logging.log4j.LogManager;
 
 /**
  *
- * @author froha
+ * @author Fereshteh
  */
 @WebServlet(name = "UserRegistrationServlet", urlPatterns = {"/UserRegistrationServlet"})
 public class UserRegistrationServlet extends HttpServlet {
@@ -40,7 +40,6 @@ public class UserRegistrationServlet extends HttpServlet {
             throws ServletException, IOException {
         logger.info("Received POST request from " + request.getRemoteAddr());
         Validator validate = new Validator();
-        //processRequest(request, response);
         
         String validationError = "";
         
@@ -93,9 +92,7 @@ public class UserRegistrationServlet extends HttpServlet {
             } catch (SQLException e) {
                 logger.error("Error in adding registration. Could not add user to database.");
                 e.printStackTrace();
-                Logger.getLogger(RetailerServlet.class.getName()).log(Level.SEVERE, null, e);
-                //response.sendRedirect("views/registrationError.jsp");
-                
+                Logger.getLogger(RetailerServlet.class.getName()).log(Level.SEVERE, null, e);                
                 request.setAttribute("validationError", "Error in adding registration. Could not add user to database.");
                 request.getRequestDispatcher("views/registrationError.jsp").forward(request, response);
             }
@@ -106,29 +103,4 @@ public class UserRegistrationServlet extends HttpServlet {
         }
         
     }
-
-//    /**
-//     * Handles the HTTP <code>POST</code> method.
-//     *
-//     * @param request servlet request
-//     * @param response servlet response
-//     * @throws ServletException if a servlet-specific error occurs
-//     * @throws IOException if an I/O error occurs
-//     */
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        processRequest(request, response);
-//    }
-//
-//    /**
-//     * Returns a short description of the servlet.
-//     *
-//     * @return a String containing servlet description
-//     */
-//    @Override
-//    public String getServletInfo() {
-//        return "Short description";
-//    }// </editor-fold>
-
 }

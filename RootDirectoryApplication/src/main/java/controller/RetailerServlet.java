@@ -26,7 +26,7 @@ import model.FoodItem;
 import org.apache.logging.log4j.LogManager;
 
 /**
- *
+ * Servlet for handling requests related to the retailer user 
  * @author Yasaman
  */
 public class RetailerServlet extends HttpServlet {
@@ -34,7 +34,7 @@ public class RetailerServlet extends HttpServlet {
     private FoodItemDao foodItemDao;
     
     /**
-     * 
+     * Allows for one-time initialization before the servlet starts handling requests.
      * @throws ServletException 
      */
     @Override

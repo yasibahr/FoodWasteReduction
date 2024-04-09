@@ -18,7 +18,7 @@ import model.FoodItem;
 import org.apache.logging.log4j.LogManager;
 
 /**
- *
+ * Servlet for updating food items as retailer
  * @author Yasaman
  */
 public class UpdateFoodItemServlet extends HttpServlet {
@@ -27,7 +27,7 @@ public class UpdateFoodItemServlet extends HttpServlet {
     private FoodItem foodItem;
     
     /**
-     * 
+     * Allows for one-time initialization before the servlet starts handling requests.
      * @throws ServletException 
      */
     @Override
@@ -59,7 +59,6 @@ public class UpdateFoodItemServlet extends HttpServlet {
         int statusTypeID = Integer.parseInt(request.getParameter("statusTypeID"));
         String priceString = request.getParameter("price");
         
-//        String validatePrice = validator.validatePrice(priceString);
         //PRICE
         String priceStr = request.getParameter("price");
         Double priceDouble = validator.validateAndParsePrice(priceStr);
