@@ -61,7 +61,7 @@ public class UpdateFoodItemServlet extends HttpServlet {
                 //update food item in DB
                 foodItemDao.updateFoodItemByStatusTypeID(foodItem, statusTypeID);
                 
-                response.sendRedirect("RetailerServlet"); //send back to retailer home page with updated statusType
+                response.sendRedirect("CharityServlet"); //send back to retailer home page with updated statusType
             } else {
                 logger.error("foodItem not found in datbase");
                 response.sendRedirect("views/errorPage.jsp"); //send to error page
