@@ -19,6 +19,6 @@ public interface FoodItemDao {
 	FoodItem getFoodItemByFoodItemID(Integer foodID) throws SQLException, IOException;
         List<FoodItem> getDiscountedFoodItems() throws SQLException, IOException;
 	void addFoodItem(FoodItem foodItem) throws SQLException, IOException;
-	void updateFoodItemByStatusTypeID(FoodItem foodItem, Integer statusTypeID) throws SQLException, IOException;
+	void updateFoodItemByStatusTypeIDAndPrice(FoodItem foodItem, Integer statusTypeID, Double price) throws SQLException, IOException;
 	void deleteFoodItem(FoodItem foodItem) throws SQLException, IOException;
 }

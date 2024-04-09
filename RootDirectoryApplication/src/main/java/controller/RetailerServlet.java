@@ -21,12 +21,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.FoodItem;
 import org.apache.logging.log4j.LogManager;
 
 /**
  *
- * @author ybahr
+ * @author Yasaman
  */
 public class RetailerServlet extends HttpServlet {
     private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(RetailerServlet.class);
@@ -54,7 +55,14 @@ public class RetailerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Received GET request from " + request.getRemoteAddr());
-
+        
+        HttpSession session = request.getSession(false); // false = don't create a new session
+        if (session == null || session.getAttribute("user") == null) {
+            logger.error("session is null in retailer servlet.");
+            response.sendRedirect("errorPage.jsp"); 
+            return;
+        }        
+        
         List<FoodItem> allFoodItems = new ArrayList<FoodItem>();
         
         try {

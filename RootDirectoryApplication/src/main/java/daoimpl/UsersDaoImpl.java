@@ -288,65 +288,65 @@ public class UsersDaoImpl implements UsersDao {
         } 
     }
     
-public Users validateUser(String email, String password) throws SQLException, IOException {
-    Users user = null;
-    Connection con = null;
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-            
-    try {
-        con = DataSource.getConnection();
-        String sql = "SELECT "
-                + "Users.userID, "
-                + "Users.userName, "
-                + "Users.email, "
-                + "Users.phone, "
-                + "Users.password, "
-                + "Users.userTypeID, "
-                + "User_Type.userType "
-                + "FROM Users "
-                + "JOIN User_Type ON Users.userTypeID = User_Type.userTypeID "
-                + "WHERE Users.email = ? AND Users.password = ?";
-        pstmt = con.prepareStatement(sql);
+    public Users validateUser(String email, String password) throws SQLException, IOException {
+        Users user = null;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-        System.out.println("Executing SQL: " + sql);
-        System.out.println("With parameters: Email = " + email + ", Password = [protected]"); 
+        try {
+            con = DataSource.getConnection();
+            String sql = "SELECT "
+                    + "Users.userID, "
+                    + "Users.userName, "
+                    + "Users.email, "
+                    + "Users.phone, "
+                    + "Users.password, "
+                    + "Users.userTypeID, "
+                    + "User_Type.userType "
+                    + "FROM Users "
+                    + "JOIN User_Type ON Users.userTypeID = User_Type.userTypeID "
+                    + "WHERE Users.email = ? AND Users.password = ?";
+            pstmt = con.prepareStatement(sql);
 
-        pstmt.setString(1, email);
-        pstmt.setString(2, password);
+            System.out.println("Executing SQL: " + sql);
+            System.out.println("With parameters: Email = " + email + ", Password = [protected]"); 
 
-        rs = pstmt.executeQuery(); //send sql query to db to be executed
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
 
-        //check if the db returned anything. rs.next() returns true if email and password found
-        if (rs.next()) {
-            user = new Users();
-            user.setUserID(rs.getInt("userID"));
-            user.setUserName(rs.getString("userName"));
-            user.setEmail(rs.getString("email"));
-            user.setPhone(rs.getString("phone"));
-            user.setPassword(rs.getString("password")); 
-            user.setUserTypeID(rs.getInt("userTypeID"));
+            rs = pstmt.executeQuery(); //send sql query to db to be executed
 
-            UserType userType = new UserType();
-            userType.setUserTypeID(rs.getInt("userTypeID"));
-            userType.setUserType(rs.getString("userType"));
-            user.setUserType(userType);
-        }
-        //else means email and password not found in db 
-    } catch (SQLException e) {
-        throw new SQLException("Cannot validate user. Issues with the sql. Email and password combination may not exist in the database.", e);
-    } 
-//    finally {
-//        try {
-//            if (rs != null) rs.close();
-//            if (pstmt != null) pstmt.close();
-//            if (con != null) con.close();
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//            logger.error("trouble closing resources");
-//        }
-//    }
-    return user; //if email and password not found, user=null
-}
+            //check if the db returned anything. rs.next() returns true if email and password found
+            if (rs.next()) {
+                user = new Users();
+                user.setUserID(rs.getInt("userID"));
+                user.setUserName(rs.getString("userName"));
+                user.setEmail(rs.getString("email"));
+                user.setPhone(rs.getString("phone"));
+                user.setPassword(rs.getString("password")); 
+                user.setUserTypeID(rs.getInt("userTypeID"));
+
+                UserType userType = new UserType();
+                userType.setUserTypeID(rs.getInt("userTypeID"));
+                userType.setUserType(rs.getString("userType"));
+                user.setUserType(userType);
+            }
+            //else means email and password not found in db 
+        } catch (SQLException e) {
+            throw new SQLException("Cannot validate user. Issues with the sql. Email and password combination may not exist in the database.", e);
+        } 
+    //    finally {
+    //        try {
+    //            if (rs != null) rs.close();
+    //            if (pstmt != null) pstmt.close();
+    //            if (con != null) con.close();
+    //        } catch (SQLException ex) {
+    //            ex.printStackTrace();
+    //            logger.error("trouble closing resources");
+    //        }
+    //    }
+        return user; //if email and password not found, user=null
+    }
 
 }

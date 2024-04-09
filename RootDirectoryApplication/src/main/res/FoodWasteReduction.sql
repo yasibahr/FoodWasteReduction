@@ -67,7 +67,7 @@ ALTER TABLE Transactions AUTO_INCREMENT=500;
 CREATE TABLE Food_Item(
     foodID INT NOT NULL AUTO_INCREMENT,
     foodName VARCHAR(50) NOT NULL,
-    expirationDate DATETIME NOT NULL,
+    expirationDate DATE NOT NULL,
     price FLOAT NOT NULL,
     quantity INT NOT NULL,
     statusTypeID INT, 
@@ -142,13 +142,13 @@ INSERT INTO Status_Type (statusTypeName) VALUES ('Donated');
 COMMIT;
 
 INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
-VALUES ('bananas', '2024-04-11 13:23:44', 5.00, 4, 300, null, 401, 101, 206); -- retailer1 is adding something
+VALUES ('bananas', '2024-04-11', 5.00, 4, 300, null, 401, 101, 206); -- retailer1 is adding something
 INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
-VALUES ('bread', '2024-05-11 13:23:44', 10.00, 1, 300, null, 401, 101, 206); -- retailer1 is adding something
+VALUES ('bread', '2024-05-11', 10.00, 1, 300, null, 401, 101, 206); -- retailer1 is adding something
 INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
-VALUES ('fish', '2024-04-20 13:23:44', 5.00, 4, 301, null, 401, 101, 206); -- retailer1 is adding something
+VALUES ('fish', '2024-04-20', 5.00, 4, 301, null, 401, 101, 206); -- retailer1 is adding something
 INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
-VALUES ('apples', '2024-06-20 13:23:44', 5.00, 4, 302, null, 401, 101, 206); -- retailer1 is adding something
+VALUES ('apples', '2024-06-20', 5.00, 4, 302, null, 401, 101, 206); -- retailer1 is adding something
 COMMIT;
 
     
