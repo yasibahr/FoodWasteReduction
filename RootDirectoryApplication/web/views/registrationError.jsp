@@ -13,7 +13,12 @@
     </head>
     <body>
         <h1>Error!</h1>
+        <p>${requestScope.validationError}</p>
     </body>
+    
+    <div>
+        <a href="views/usersRegistration.jsp">Back to registration form</a>
+    </div>
     
     <div>
         <a href="index.jsp">Home</a>
