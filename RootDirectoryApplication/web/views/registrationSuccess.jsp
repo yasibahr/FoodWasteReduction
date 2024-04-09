@@ -16,7 +16,7 @@
     </body>
     
     <div>
-        <a href="index.jsp">Home</a>
+        <a href="../index.jsp">Home</a>
     </div>
     
 </html>
