@@ -9,14 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Success</title>
+        <title>Error</title>
     </head>
     <body>
         <h1>Error!</h1>
     </body>
     
     <div>
-        <a href="index.html">Home</a>
+        <a href="index.jsp">Home</a>
     </div>
     
 </html>

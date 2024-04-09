@@ -5,7 +5,6 @@
 package controller;
 
 import businesslayer.FoodItemBusinessLogic;
-import static com.mysql.cj.conf.PropertyKey.logger;
 import dao.FoodItemDao;
 import daoimpl.FoodItemDaoImpl;
 import daoimpl.UsersDaoImpl;

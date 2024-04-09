@@ -60,11 +60,11 @@ public class LoginServlet extends HttpServlet {
         //try to authenticate user
         try {
             Users user = usersDao.getUserByEmail(email); //use email to get user
-            logger.debug("Processing request for email: " + email);
+            logger.info("Processing request for email: " + email);
 
             
             if (user != null) {
-                logger.debug("User is not null");
+                logger.info("User is not null");
                 int userType = user.getUserTypeID(); //returns userTypeID
 
                 request.getSession().setAttribute("user", user); //set user

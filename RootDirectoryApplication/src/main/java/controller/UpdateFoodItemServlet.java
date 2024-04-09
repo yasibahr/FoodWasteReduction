@@ -4,7 +4,6 @@
  */
 package controller;
 
-import static com.mysql.cj.conf.PropertyKey.logger;
 import dao.FoodItemDao;
 import daoimpl.FoodItemDaoImpl;
 import daoimpl.UsersDaoImpl;
