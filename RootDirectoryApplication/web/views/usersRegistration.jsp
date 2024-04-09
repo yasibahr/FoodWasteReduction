@@ -17,7 +17,6 @@
     </head>
     <body>
         
-        
         <h2>User Registration Form</h2>
     
         <form action="../UserRegistrationServlet" method="post">
@@ -32,21 +31,37 @@
 
             <label for="phone">Phone:</label>
             <input type="text" id="phone" name="phone" required><br><br>
-
-            <label for="cityID">City ID:</label>
-            <input type="text" id="cityID" name="cityID" required><br><br>
-
+            
+            <label for="cityID">City:</label>
+            <select name="cityID" id="cityID">
+                <option value="200" selected>Ottawa</option>
+                <option value="201">Toronto</option>
+                <option value="202">Vancouver</option>
+                <option value="203">Montreal</option>
+                <option value="204">Calgary</option>
+                <option value="205">Edmonton</option>
+                <option value="206">Quebec</option>
+                <option value="207">Halifax</option>
+                <option value="208">Winnipeg</option>
+                <option value="209">Hamilton</option>
+                <option value="210">London</option>
+                <option value="211">Victoria</option>
+            </select>
+            
+            <br><br>
+            
             <label for="userType">User Type:</label>
             <select name="userType" id="userType">
-                <option value="admin" selected>Admin</option>
-                <option value="retailor">Retailer</option>
-                <option value="consumer">Consumer</option>
-                <option value="charity">Charity</option>
+                <option value="100" selected>Admin</option>
+                <option value="101">Retailer</option>
+                <option value="102">Consumer</option>
+                <option value="103">Charity</option>
             </select>
+            
+            <br><br>
             
             <input type="submit" value="Register">
         </form>
-        
         
     </body>
 </html>

@@ -42,64 +42,67 @@ public class UserRegistrationServlet extends HttpServlet {
         Validator validate = new Validator();
         //processRequest(request, response);
         
+        String validationError = "";
+        
         String userName = request.getParameter("userName");
-        validate.validateUserName(userName);
+        Boolean userIsValid = validate.validateUserName(userName);
+        if(!userIsValid){
+            validationError = validate.getValidatorException();
+        }
         
         String password = request.getParameter("password");
-        validate.validatePassword(password);
+        Boolean passwordIsValid = validate.validatePassword(password);
+        if(!passwordIsValid){
+            validationError = validate.getValidatorException();
+        }
         
         String email = request.getParameter("email");
-        validate.validateEmail(email);
+        Boolean emailIsValid = validate.validateEmail(email);
+        if(!emailIsValid){
+            validationError = validate.getValidatorException();
+        }
         
         String phone = request.getParameter("phone");
-        validate.validatePhoneNumber(phone);
+        Boolean phoneIsValid = validate.validatePhoneNumber(phone);
+        if(!phoneIsValid){
+            validationError = validate.getValidatorException();
+        }
         
         int cityID = Integer.parseInt(request.getParameter("cityID"));
-        validate.validateCityID(cityID);
         
-        String userType = request.getParameter("userType");
+        int userType = Integer.parseInt(request.getParameter("userType"));
 
-        Users user = new Users();
-        user.setUserName(userName);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setPhone(phone);
-        user.setCityID(cityID);
-        
-        switch (userType) {
-            case "admin":
-                user.setUserTypeID(100);
-                logger.info("creating admin");
-                break;
-            case "retailor":
-                user.setUserTypeID(101);
-                logger.info("creating retailer");
-                break;
-            case "consumer":
-                user.setUserTypeID(102);
-                logger.info("creating consumer");
-                break;
-            case "charity":
-                user.setUserTypeID(103);
-                logger.info("creating charity");
-                break;
-            default:
-                break;
-        }
-        logger.info("user has been created");
+        if(userIsValid && passwordIsValid && emailIsValid && phoneIsValid){
+            
+            Users user = new Users();
+            user.setUserName(userName);
+            user.setPassword(password);
+            user.setEmail(email);
+            user.setPhone(phone);
+            user.setCityID(cityID);
+            user.setUserTypeID(userType);
+
+            logger.info("user has been created");
+
+            UsersDaoImpl userDaoImpl = new UsersDaoImpl();
+
+            try {
+                userDaoImpl.addUser(user);
+                logger.info("Registration was a success. Added user to database.");
+                response.sendRedirect("views/registrationSuccess.jsp");
+            } catch (SQLException e) {
+                logger.error("Error in adding registration. Could not add user to database.");
+                e.printStackTrace();
+                Logger.getLogger(RetailerServlet.class.getName()).log(Level.SEVERE, null, e);
+                //response.sendRedirect("views/registrationError.jsp");
                 
-        UsersDaoImpl userDaoImpl = new UsersDaoImpl();
-        
-        
-        try {
-            userDaoImpl.addUser(user);
-            logger.info("Registration was a success. Added user to database.");
-            response.sendRedirect("views/registrationSuccess.jsp");
-        } catch (SQLException e) {
-            logger.error("Error in adding registration. Could not add user to database.");
-            e.printStackTrace();
-            Logger.getLogger(RetailerServlet.class.getName()).log(Level.SEVERE, null, e);
-            response.sendRedirect("views/registrationError.jsp");
+                request.setAttribute("validationError", "Error in adding registration. Could not add user to database.");
+                request.getRequestDispatcher("views/registrationError.jsp").forward(request, response);
+            }
+            
+        }else{
+             request.setAttribute("validationError", validationError);
+             request.getRequestDispatcher("views/registrationError.jsp").forward(request, response);
         }
         
     }
