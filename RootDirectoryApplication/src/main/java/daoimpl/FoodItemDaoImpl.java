@@ -56,8 +56,8 @@ public class FoodItemDaoImpl implements FoodItemDao{
                     + "Status_Type.statusTypeName "
                     + "FROM Food_Item "
                     + "JOIN Status_Type "
-                    + "WHERE Status_Type.statusTypeID = 304"
                     + "ON Food_Item.statusTypeID = Status_Type.statusTypeID "
+                    //Add this line in a new method + "WHERE Status_Type.statusTypeID = 304"
                     + "ORDER BY Food_Item.foodID");
             rs = pstmt.executeQuery();
             
