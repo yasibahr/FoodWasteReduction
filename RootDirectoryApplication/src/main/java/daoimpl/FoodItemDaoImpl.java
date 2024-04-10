@@ -318,8 +318,8 @@ public class FoodItemDaoImpl implements FoodItemDao{
             throw new IOException("Cannot get all food items due to Input/Output.", ex);
         } 
         return allFoodItems;
+    }
     
-        Connection con = null;
 
 
     @Override
@@ -346,8 +346,8 @@ public class FoodItemDaoImpl implements FoodItemDao{
                     + "Status_Type.statusTypeName "
                     + "FROM Food_Item "
                     + "JOIN Status_Type "
-                    + "WHERE Status_Type.statusTypeID = 304"
                     + "ON Food_Item.statusTypeID = Status_Type.statusTypeID "
+                    + "WHERE Status_Type.statusTypeID = 304 "
                     + "ORDER BY Food_Item.foodID");
             rs = pstmt.executeQuery();
             

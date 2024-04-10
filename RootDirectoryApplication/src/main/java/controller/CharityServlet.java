@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.FoodItem;
 import org.apache.logging.log4j.LogManager;
 
@@ -30,6 +31,7 @@ import org.apache.logging.log4j.LogManager;
 public class CharityServlet extends HttpServlet {
     private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(CharityServlet.class);
     private FoodItemDao foodItemDao;
+    
     @Override
     public void init() throws ServletException {
         super.init();
@@ -48,6 +50,13 @@ public class CharityServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Received GET request from " + request.getRemoteAddr());
+
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            logger.error("session in charity is null");
+            response.sendRedirect("errorPage.jsp"); 
+            return;
+        }  
 
         List<FoodItem> allFoodItems = new ArrayList<FoodItem>();
         

@@ -15,6 +15,12 @@
     </head>
     <body>
         <h1>Charity</h1>
+        
+        <!--Log out button-->
+        <form action="index.jsp" method="get">
+            <input type="submit" value="Log out" />
+        </form>
+        
         <h2>List of food items up for donation</h2>
 
         <table border="1">

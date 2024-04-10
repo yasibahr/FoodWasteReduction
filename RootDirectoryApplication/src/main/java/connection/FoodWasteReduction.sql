@@ -148,7 +148,13 @@ VALUES ('bread', '2024-05-11', 10.00, 1, 300, null, 401, 101, 206); -- retailer1
 INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
 VALUES ('fish', '2024-04-20', 5.00, 4, 301, null, 401, 101, 206); -- retailer1 is adding something
 INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
-VALUES ('apples', '2024-06-20', 5.00, 4, 302, null, 401, 101, 206); -- retailer1 is adding something
+VALUES ('apples', '2024-06-20', 5.00, 4, 303, null, 401, 101, 206); -- retailer1 is adding something
+INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
+VALUES ('apples', '2024-06-20', 5.00, 4, 304, null, 401, 101, 206); -- retailer1 is adding something
+INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
+VALUES ('pasta', '2024-06-20', 5.00, 4, 303, null, 401, 101, 206); -- retailer1 is adding something
+INSERT INTO Food_Item (foodName, expirationDate, price, quantity, statusTypeID, transactionID, userID, userTypeID, cityID) 
+VALUES ('cheese', '2024-06-20', 5.00, 4, 304, null, 401, 101, 206); -- retailer1 is adding something
 COMMIT;
 
     

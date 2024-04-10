@@ -65,7 +65,7 @@ public class ConsumerServlet extends HttpServlet {
         List<FoodItem> allFoodItems = new ArrayList<FoodItem>();
         
         try {
-            allFoodItems = foodItemDao.getAllFoodItems();            
+            allFoodItems = foodItemDao.getDiscountedFoodItems();            
         
             if(allFoodItems==null || allFoodItems.isEmpty()){
                 logger.info("forSaleFoodItems list is empty");
