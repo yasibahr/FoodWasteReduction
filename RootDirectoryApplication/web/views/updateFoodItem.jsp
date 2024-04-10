@@ -24,9 +24,9 @@
                 <option value="300">Available</option>
                 <option value="301">Sold</option>
                 <option value="302">Claimed</option>
-                <option value="303">Deleted</option>
+                <!--<option value="303">Deleted</option>-->
                 <option value="304">Discounted</option>
-                <option value="305">Donated</option>
+                <option value="305">For Donation</option>
             </select><br>
             <input type="submit" value="Update">
             <input type="hidden" name="foodID" value="<%= request.getParameter("foodID") %>" /> <!--pass foodID in the form too so I can use it in servlet-->
