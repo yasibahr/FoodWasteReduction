@@ -5,6 +5,7 @@ package controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import connection.DataSource;
 import dao.UsersDao;
 import daoimpl.UsersDaoImpl;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import model.City;
 import model.UserType;
 import model.Users;
 import org.apache.logging.log4j.LogManager;
+import java.sql.Connection;
 
 /**
  * Servlet for handling requests for the initial login
@@ -33,7 +35,7 @@ import org.apache.logging.log4j.LogManager;
 public class LoginServlet extends HttpServlet {
     private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(LoginServlet.class);
     private UsersDao usersDao;
-
+    private Connection con;
     /**
      * Allows for one-time initialization before the servlet starts handling requests.
      * @throws ServletException 
@@ -41,7 +43,14 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.usersDao = new UsersDaoImpl(); //initialize DAO per servlet lifecycle
+        this.usersDao = new UsersDaoImpl(); 
+        try {
+            con = DataSource.getConnection();//initialize DAO per servlet lifecycle
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -105,4 +114,3 @@ public class LoginServlet extends HttpServlet {
         }
     }
 }
-
